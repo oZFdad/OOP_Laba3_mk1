@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_Laba3_mk1", "OOP_Laba3_mk1\OOP_Laba3_mk1.csproj", "{297A096F-F365-43FE-A8A0-59FF0DA8C1E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_Laba4_mk1", "OOP_Laba4_mk1\OOP_Laba4_mk1.csproj", "{44E12C4D-73AF-4A01-9A25-582A4F2F038C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{297A096F-F365-43FE-A8A0-59FF0DA8C1E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{297A096F-F365-43FE-A8A0-59FF0DA8C1E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{297A096F-F365-43FE-A8A0-59FF0DA8C1E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{297A096F-F365-43FE-A8A0-59FF0DA8C1E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E12C4D-73AF-4A01-9A25-582A4F2F038C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E12C4D-73AF-4A01-9A25-582A4F2F038C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E12C4D-73AF-4A01-9A25-582A4F2F038C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E12C4D-73AF-4A01-9A25-582A4F2F038C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D93C5599-BA75-4456-9C36-433BCC9DDB6C}
+	EndGlobalSection
+EndGlobal
