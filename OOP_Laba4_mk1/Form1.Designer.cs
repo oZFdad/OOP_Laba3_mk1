@@ -23,8 +23,8 @@
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -36,10 +36,12 @@
             // painBox
             // 
             this.painBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.painBox.Location = new System.Drawing.Point(453, 4);
+            this.painBox.Location = new System.Drawing.Point(352, 3);
+            this.painBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.painBox.Name = "painBox";
-            this.painBox.Size = new System.Drawing.Size(799, 766);
+            this.painBox.Size = new System.Drawing.Size(622, 575);
             this.painBox.TabIndex = 0;
+            this.painBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseDown);
             this.painBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseUp);
             // 
             // painter
@@ -50,14 +52,14 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 782);
+            this.ClientSize = new System.Drawing.Size(983, 586);
             this.Controls.Add(this.painBox);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
-
         }
 
         #endregion

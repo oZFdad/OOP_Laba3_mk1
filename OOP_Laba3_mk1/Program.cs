@@ -9,7 +9,7 @@ namespace OOP_Laba3_mk1
         {
             Stopwatch time = new Stopwatch();
             time.Start();
-            Storage storage = new Storage(100);
+            Storage.Storage storage = new Storage.Storage(100);
             storage.LetsDoSomething(100);
             time.Stop();
             Console.WriteLine("\nПрограмма выполнена за {0} секунд", (time.ElapsedMilliseconds / 1000.0).ToString());

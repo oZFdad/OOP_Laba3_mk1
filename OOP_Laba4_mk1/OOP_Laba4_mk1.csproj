@@ -79,5 +79,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StorageForPain\StorageForPain.csproj">
+      <Project>{067057b0-0e3c-45f9-a4d0-240e4786b366}</Project>
+      <Name>StorageForPain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Storage\Storage.csproj">
+      <Project>{b4586ca4-2a8e-46fa-93a3-756212700d69}</Project>
+      <Name>Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

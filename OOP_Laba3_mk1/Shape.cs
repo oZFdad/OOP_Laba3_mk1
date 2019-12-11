@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿/*
 
 namespace OOP_Laba3_mk1
 {
@@ -289,4 +288,4 @@ namespace OOP_Laba3_mk1
         }
     }
 
-}
+}*/
