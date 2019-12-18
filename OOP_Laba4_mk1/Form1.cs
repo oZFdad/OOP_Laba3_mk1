@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Storage;
+using StorageForPain;
 
 
 namespace OOP_Laba4_mk1
 {
     public partial class Form1 : Form
     {
-        private Storage.Storage _storage = new Storage.Storage(20);
+        private StorageForPain.Storage _storage = new StorageForPain.Storage(20);
         public Form1()
         {
             InitializeComponent();

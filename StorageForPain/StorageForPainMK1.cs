@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 
-namespace Storage
+namespace StorageForPain
 {
     public class Vbr
     {
-        public int x, y, item, toBe;
+        public int x, y;
         public double r;
 
         public Vbr(Random rnd)
@@ -13,8 +13,6 @@ namespace Storage
             x = rnd.Next(-100, 100);
             y = rnd.Next(-100, 100);
             r = rnd.NextDouble() * 10;
-            item = rnd.Next(0, 3);
-            toBe = rnd.Next(0, 10);
         }
 
         public Vbr(int x, int y, double r)
@@ -128,11 +126,13 @@ namespace Storage
         public Storage()
         {
             _maxSize = 10;
+            _box = new Shape[_maxSize];
         }
 
         public Storage(int maxSize)
         {
             _maxSize = maxSize;
+            _box = new Shape[_maxSize];
         }
 
         private bool CheckSpace() // проверка свободных мест
@@ -151,6 +151,7 @@ namespace Storage
             {
                 _bufer[i] = _box[i];
             }
+            
             _box = _bufer;
         }
 
@@ -162,6 +163,28 @@ namespace Storage
             }
             _box[_index] = item;
             _index++;
+        }
+
+        public void CreatRandomItems (int numbers)
+        {
+            Random rnd = new Random();
+            int rand = rnd.Next(0, 2);
+            for (int i = 0; i < numbers; i++)
+            {
+                Vbr core = new Vbr(rnd);
+                if (i == 0)
+                {
+                    CreatItem(new Circle(core));
+                }
+                else if (i == 1)
+                {
+                    CreatItem(new Triangle(core));
+                }
+                else
+                {
+                    CreatItem(new Square(core));
+                }
+            }
         }
 
         public void DeleteItem (int index)
@@ -191,12 +214,62 @@ namespace Storage
 
         public Shape GetItem(int index)
         {
-            return _box[index - 1];
+            return _box[index-1];
         }
 
         public Shape GetItem()
         {
-            return _box[_index - 1];
+            return _box[_index-1];
+        }
+
+        public void LetsDoSomething(int iterator)
+        {
+            Random rnd = new Random();
+            for(int i = 0; i < iterator; i++)
+            {
+                Vbr core = new Vbr(rnd);
+                rnd.Next(0, 5);
+                if (i == 0) //Добавление элемента
+                {
+                    int buf = rnd.Next(0, 2);
+                    if (buf == 0)
+                    {
+                        CreatItem(new Circle(core));
+                    }
+                    else if (buf == 1)
+                    {
+                        CreatItem(new Triangle(core));
+                    }
+                    else
+                    {
+                        CreatItem(new Square(core));
+                    }
+                    Console.WriteLine("Успешно добавлен элемент");
+                }
+                else if (i == 1)
+                {
+                    DeleteItem(rnd.Next(1, _index));
+                    Console.WriteLine("Успешно удален элемент");
+                }
+                else if (i == 2)
+                {
+                    DeleteItem();
+                    Console.WriteLine("Успешно удален элемент");
+                }
+                else if (i == 3)
+                {
+                    Console.WriteLine(GetMaxIdex());
+                }
+                else if (i == 4)
+                {
+                    GetItem().Display();
+                }
+                else
+                {
+                    GetItem(rnd.Next(1, _index)).Display();
+                }
+            }
+            Vbr random = new Vbr(rnd);
         }
     }
 }

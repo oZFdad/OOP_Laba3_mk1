@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-
+using StorageForPain;
 
 
 namespace OOP_Laba3_mk2
@@ -12,7 +12,9 @@ namespace OOP_Laba3_mk2
             Stopwatch time = new Stopwatch();
             time.Start();
 
-            St
+            Storage storage = new Storage();
+            storage.CreatRandomItems(15);
+            storage.LetsDoSomething(100);
 
             time.Stop();
             Console.WriteLine("\nПрограмма выполнена за {0} секунд", (time.ElapsedMilliseconds / 1000.0).ToString());
