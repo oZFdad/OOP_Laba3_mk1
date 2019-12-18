@@ -51,11 +51,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Storage\Storage.csproj">
-      <Project>{b4586ca4-2a8e-46fa-93a3-756212700d69}</Project>
-      <Name>Storage</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
