@@ -121,18 +121,18 @@ namespace StorageForPain
     public class Storage
     {
         Shape[] _box;
-        int _maxSize, _currentIndex, _index = 0;
+        int _maxSize, _index = 0;
 
         public Storage()
         {
             _maxSize = 10;
-            _box = new Shape[_maxSize];
+            _box = new Shape[_maxSize + 1];
         }
 
         public Storage(int maxSize)
         {
             _maxSize = maxSize;
-            _box = new Shape[_maxSize];
+            _box = new Shape[_maxSize + 1];
         }
 
         private bool CheckSpace() // проверка свободных мест
@@ -146,13 +146,13 @@ namespace StorageForPain
 
         private void AddSpace()
         {
-            Shape[] _bufer = new Shape[_maxSize + _maxSize/2];
+            Shape[] _bufer = new Shape[_maxSize * 2 + 1];
             for(int i = 0; i < _maxSize; i++)
             {
                 _bufer[i] = _box[i];
             }
-            
             _box = _bufer;
+            _maxSize = _maxSize * 2;
         }
 
         public void CreatItem (Shape item)
@@ -168,15 +168,16 @@ namespace StorageForPain
         public void CreatRandomItems (int numbers)
         {
             Random rnd = new Random();
-            int rand = rnd.Next(0, 2);
+            int rand;
             for (int i = 0; i < numbers; i++)
             {
+                rand = rnd.Next(0, 3);
                 Vbr core = new Vbr(rnd);
-                if (i == 0)
+                if (rand == 0)
                 {
                     CreatItem(new Circle(core));
                 }
-                else if (i == 1)
+                else if (rand == 1)
                 {
                     CreatItem(new Triangle(core));
                 }
@@ -184,27 +185,42 @@ namespace StorageForPain
                 {
                     CreatItem(new Square(core));
                 }
+                Thread.Sleep(20);
             }
         }
 
         public void DeleteItem (int index)
         {
-            if (index < _index)
+            if (_index > 0)
             {
-                for (int i = index; i < _index - 1; i++)
+                if (index < _index)
                 {
-                    _box[i] = _box[i + 1];
+                    for (int i = index; i < _index - 1; i++)
+                    {
+                        _box[i] = _box[i + 1];
+                    }
+                    _index--;
+                    Array.Clear(_box, _index, 1);
+                    //Console.WriteLine("Удален {0}-й элемент", index);
                 }
-                _index--;
-                Array.Clear(_box,_index, 1);
-                //Console.WriteLine("Удален {0}-й элемент", index);
+            }
+            else
+            {
+                Console.WriteLine("В хранилище больше нет фигур");
             }
         }
 
         public void DeleteItem()
         {
-            _index--;
-            Array.Clear(_box, _index, 1);
+            if (_index > 0)
+            {
+                _index--;
+                Array.Clear(_box, _index, 1);
+            }
+            else
+            {
+                Console.WriteLine("В хранилище больше нет фигур");
+            }
         }
 
         public int GetMaxIdex()
@@ -227,9 +243,10 @@ namespace StorageForPain
             Random rnd = new Random();
             for(int i = 0; i < iterator; i++)
             {
+                int rand;
                 Vbr core = new Vbr(rnd);
-                rnd.Next(0, 5);
-                if (i == 0) //Добавление элемента
+                rand = rnd.Next(0, 6);
+                if (rand == 0) //Добавление элемента
                 {
                     int buf = rnd.Next(0, 2);
                     if (buf == 0)
@@ -246,30 +263,43 @@ namespace StorageForPain
                     }
                     Console.WriteLine("Успешно добавлен элемент");
                 }
-                else if (i == 1)
+                else if (rand == 1)
                 {
-                    DeleteItem(rnd.Next(1, _index));
-                    Console.WriteLine("Успешно удален элемент");
+                    if (_index != 0)
+                    {
+                        DeleteItem(rnd.Next(1, _index));
+                        Console.WriteLine("Успешно удален элемент по индексу");
+                    }
                 }
-                else if (i == 2)
+                else if (rand == 2)
                 {
-                    DeleteItem();
-                    Console.WriteLine("Успешно удален элемент");
+                    if (_index != 0)
+                    {
+                        DeleteItem();
+                        Console.WriteLine("Успешно удален последний элемент");
+                    }
                 }
-                else if (i == 3)
+                else if (rand == 3)
                 {
                     Console.WriteLine(GetMaxIdex());
                 }
-                else if (i == 4)
+                else if (rand == 4)
                 {
-                    GetItem().Display();
+                    if (_index != 0)
+                    {
+                        GetItem().Display();
+                    }
                 }
                 else
                 {
-                    GetItem(rnd.Next(1, _index)).Display();
+                    if (_index != 0)
+                    {
+                        GetItem(rnd.Next(1, _index)).Display();
+                    }
                 }
+                Thread.Sleep(20);
             }
-            Vbr random = new Vbr(rnd);
+            //Vbr random = new Vbr(rnd);
         }
     }
 }
