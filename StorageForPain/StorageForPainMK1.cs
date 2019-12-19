@@ -223,6 +223,11 @@ namespace StorageForPain
             }
         }
 
+        public void DeleteAll()
+        {
+            Array.Clear(_box, 0, _index);
+        }
+
         public int GetMaxIdex()
         {
             return _index;

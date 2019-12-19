@@ -31,15 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.painBox = new System.Windows.Forms.Panel();
             this.painter = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btPaint = new System.Windows.Forms.Button();
+            this.btDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // painBox
             // 
             this.painBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.painBox.Location = new System.Drawing.Point(352, 3);
-            this.painBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.painBox.Location = new System.Drawing.Point(221, 4);
             this.painBox.Name = "painBox";
-            this.painBox.Size = new System.Drawing.Size(622, 575);
+            this.painBox.Size = new System.Drawing.Size(1046, 778);
             this.painBox.TabIndex = 0;
             this.painBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseDown);
             this.painBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseUp);
@@ -50,22 +51,44 @@
             this.painter.Name = "painter";
             this.painter.Size = new System.Drawing.Size(61, 4);
             // 
+            // btPaint
+            // 
+            this.btPaint.Location = new System.Drawing.Point(12, 12);
+            this.btPaint.Name = "btPaint";
+            this.btPaint.Size = new System.Drawing.Size(188, 87);
+            this.btPaint.TabIndex = 1;
+            this.btPaint.Text = "button1";
+            this.btPaint.UseVisualStyleBackColor = true;
+            // 
+            // btDelete
+            // 
+            this.btDelete.Location = new System.Drawing.Point(12, 125);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(188, 94);
+            this.btDelete.TabIndex = 2;
+            this.btDelete.Text = "button2";
+            this.btDelete.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(983, 586);
+            this.ClientSize = new System.Drawing.Size(1264, 781);
+            this.Controls.Add(this.btDelete);
+            this.Controls.Add(this.btPaint);
             this.Controls.Add(this.painBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+
         }
 
         #endregion
 
         private System.Windows.Forms.Panel painBox;
         private System.Windows.Forms.ContextMenuStrip painter;
+        private System.Windows.Forms.Button btPaint;
+        private System.Windows.Forms.Button btDelete;
     }
 }
 

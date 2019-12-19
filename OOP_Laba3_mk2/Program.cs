@@ -13,8 +13,8 @@ namespace OOP_Laba3_mk2
             time.Start();
 
             Storage storage = new Storage();
-            storage.CreatRandomItems(15);
-            storage.LetsDoSomething(500);
+            storage.CreatRandomItems(30);
+            storage.LetsDoSomething(50);
 
             time.Stop();
             Console.WriteLine("\nПрограмма выполнена за {0} секунд", (time.ElapsedMilliseconds / 1000.0).ToString());

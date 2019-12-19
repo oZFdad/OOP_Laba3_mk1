@@ -14,7 +14,7 @@ namespace OOP_Laba4_mk1
 {
     public partial class Form1 : Form
     {
-        private StorageForPain.Storage _storage = new StorageForPain.Storage(20);
+        private Storage _storage = new Storage(10);
         public Form1()
         {
             InitializeComponent();
@@ -22,8 +22,7 @@ namespace OOP_Laba4_mk1
 
         private void painBox_MouseUp(object sender, MouseEventArgs e)
         {
-            _storage.CreateItem(_storage.GetCurrentIndex(),new Circle(e.X,e.Y,5.000));
-            _storage.Next();
+
         }
 
         private void painBox_MouseDown(object sender, MouseEventArgs e)
