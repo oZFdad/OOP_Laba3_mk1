@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading;
 
 namespace StorageForPainDLL
@@ -47,6 +48,8 @@ namespace StorageForPainDLL
         public abstract void Display();
         public abstract void Move(Vbr track);
         public abstract void ChangeR(Vbr track); // изменение радиуса
+        public abstract bool CheckPoint(int _x, int _y);
+        public abstract void Draw(Bitmap bmp);
     }
 
     class Triangle : Shape
@@ -69,6 +72,16 @@ namespace StorageForPainDLL
         {
 
         }
+
+        public override bool CheckPoint(int _x, int _y)
+        {
+            return false;
+        }
+
+        public override void Draw(Bitmap bmp)
+        {
+            
+        }
     }
 
     class Square : Shape
@@ -88,6 +101,16 @@ namespace StorageForPainDLL
         }
 
         public override void Move(Vbr track)
+        {
+
+        }
+
+        public override bool CheckPoint(int _x, int _y)
+        {
+            return false;
+        }
+
+        public override void Draw(Bitmap bmp)
         {
 
         }
@@ -116,6 +139,35 @@ namespace StorageForPainDLL
         public override void Move(Vbr track)
         {
 
+        }
+
+        public override bool CheckPoint(int dx, int dy)
+        {
+            dx = x - dx;
+            dy = y - dy;
+            if (dx * dx + dy * dy <= r * r)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override void Draw(Bitmap bmp)
+        {
+            Graphics graph = Graphics.FromImage(bmp);
+            Pen pen;
+            if (flag)
+            {
+                pen = new Pen(Color.Blue);
+            }
+            else
+            {
+                pen = new Pen(Color.Red);
+            }
+            graph.DrawEllipse(pen, x - r, y - r, 2*r, 2*r);
         }
     }
 
@@ -158,7 +210,7 @@ namespace StorageForPainDLL
 
         public void CreatItem (Shape item)
         {
-            if (CheckSpace()==false) // сломал голову, как правильно ????
+            if (!CheckSpace()) // сломал голову, как правильно ????
             {
                 AddSpace();
             }
@@ -194,9 +246,9 @@ namespace StorageForPainDLL
         {
             if (_index > 0)
             {
-                if (index < _index)
+                if (index <= _index)
                 {
-                    for (int i = index; i < _index - 1; i++)
+                    for (int i = index - 1; i < _index - 1; i++)
                     {
                         _box[i] = _box[i + 1];
                     }

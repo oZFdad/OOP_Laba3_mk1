@@ -29,6 +29,30 @@ namespace OOP_Laba4_mk1
                 _storage.CreatItem(circle);
                 labelNumber.Text = "Объектов в хранилище " + Convert.ToString(_storage.GetMaxIdex());
             }
+            else
+            {
+                for (int i=1;i<=_storage.GetMaxIdex(); i++)
+                {
+                    var shape = _storage.GetItem(i);
+                    if(shape.CheckPoint(e.X, e.Y))
+                    {
+                        if (shape.flag)
+                        {
+                            shape.flag = false;
+                        }
+                        else
+                        {
+                            shape.flag = true;
+                        }
+                    }
+                }
+                Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
+                for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+                {
+                    _storage.GetItem(i).Draw(bmp);
+                }
+                painBox.BackgroundImage = bmp;
+            }
         }
 
         private void btPaint_Click(object sender, EventArgs e)
@@ -36,14 +60,18 @@ namespace OOP_Laba4_mk1
             if (_storage.GetMaxIdex() != 0)
             {
                 Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
-                Graphics graph = Graphics.FromImage(bmp);
-                Pen pen = new Pen(Color.Red);
-                pen.Color = Color.Blue;
-                Shape circle;
-                for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+                //Graphics graph = Graphics.FromImage(bmp);
+                //Pen pen = new Pen(Color.Red);
+                ////pen.Color = Color.Blue;
+                //Shape circle;
+                //for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+                //{
+                //    circle = _storage.GetItem(i);
+                //    graph.DrawEllipse(pen, circle.x - circle.r / 2, circle.y - circle.r / 2, circle.r, circle.r);
+                //}
+                for(int i = 1; i <= _storage.GetMaxIdex(); i++)
                 {
-                    circle = _storage.GetItem(i);
-                    graph.DrawEllipse(pen, circle.x - circle.r / 2, circle.y - circle.r / 2, circle.r, circle.r);
+                    _storage.GetItem(i).Draw(bmp);
                 }
                 creatCircleOnPicture = false;
                 painBox.BackgroundImage = bmp;
@@ -58,6 +86,27 @@ namespace OOP_Laba4_mk1
             Graphics graph = Graphics.FromImage(bmp);
             creatCircleOnPicture = true;
             painBox.BackgroundImage = bmp;
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                for(int i = 1; i <= _storage.GetMaxIdex(); i++)
+                {
+                    if (_storage.GetItem(i).flag)
+                    {
+                        _storage.DeleteItem(i);
+                        i--;
+                    }
+                }
+                Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
+                for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+                {
+                    _storage.GetItem(i).Draw(bmp);
+                }
+                painBox.BackgroundImage = bmp;
+            }
         }
     }
 }

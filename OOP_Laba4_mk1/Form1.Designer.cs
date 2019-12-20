@@ -43,9 +43,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.painBox.BackColor = System.Drawing.SystemColors.ControlDark;
             this.painBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.painBox.Location = new System.Drawing.Point(296, 1);
+            this.painBox.Location = new System.Drawing.Point(263, 1);
+            this.painBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.painBox.Name = "painBox";
-            this.painBox.Size = new System.Drawing.Size(971, 781);
+            this.painBox.Size = new System.Drawing.Size(863, 625);
             this.painBox.TabIndex = 0;
             this.painBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseDown);
             // 
@@ -57,9 +58,10 @@
             // 
             // btPaint
             // 
-            this.btPaint.Location = new System.Drawing.Point(12, 12);
+            this.btPaint.Location = new System.Drawing.Point(11, 10);
+            this.btPaint.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btPaint.Name = "btPaint";
-            this.btPaint.Size = new System.Drawing.Size(260, 87);
+            this.btPaint.Size = new System.Drawing.Size(231, 70);
             this.btPaint.TabIndex = 1;
             this.btPaint.Text = "Отрисовать объекты";
             this.btPaint.UseVisualStyleBackColor = true;
@@ -67,9 +69,10 @@
             // 
             // btDelete
             // 
-            this.btDelete.Location = new System.Drawing.Point(12, 125);
+            this.btDelete.Location = new System.Drawing.Point(11, 100);
+            this.btDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(260, 94);
+            this.btDelete.Size = new System.Drawing.Size(231, 75);
             this.btDelete.TabIndex = 2;
             this.btDelete.Text = "Удалить объекты";
             this.btDelete.UseVisualStyleBackColor = true;
@@ -78,23 +81,26 @@
             // labelNumber
             // 
             this.labelNumber.AutoSize = true;
-            this.labelNumber.Location = new System.Drawing.Point(8, 234);
+            this.labelNumber.Location = new System.Drawing.Point(7, 187);
             this.labelNumber.Name = "labelNumber";
-            this.labelNumber.Size = new System.Drawing.Size(136, 20);
+            this.labelNumber.Size = new System.Drawing.Size(117, 17);
             this.labelNumber.TabIndex = 3;
             this.labelNumber.Text = "кол-во объектов";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 781);
+            this.ClientSize = new System.Drawing.Size(1124, 625);
             this.Controls.Add(this.labelNumber);
             this.Controls.Add(this.btDelete);
             this.Controls.Add(this.btPaint);
             this.Controls.Add(this.painBox);
+            this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
