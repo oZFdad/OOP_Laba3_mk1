@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_Laba3_mk1", "OOP_Laba3_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_Laba4_mk1", "OOP_Laba4_mk1\OOP_Laba4_mk1.csproj", "{44E12C4D-73AF-4A01-9A25-582A4F2F038C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageForPain", "StorageForPain\StorageForPain.csproj", "{067057B0-0E3C-45F9-A4D0-240E4786B366}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageForPainDLL", "StorageForPain\StorageForPainDLL.csproj", "{067057B0-0E3C-45F9-A4D0-240E4786B366}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_Laba3_mk2", "OOP_Laba3_mk2\OOP_Laba3_mk2.csproj", "{F2B13374-39BC-4A98-B7D6-349B0BC97C7E}"
 EndProject

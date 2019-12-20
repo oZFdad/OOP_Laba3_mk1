@@ -33,17 +33,21 @@
             this.painter = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btPaint = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
+            this.labelNumber = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // painBox
             // 
+            this.painBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.painBox.BackColor = System.Drawing.SystemColors.ControlDark;
             this.painBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.painBox.Location = new System.Drawing.Point(221, 4);
+            this.painBox.Location = new System.Drawing.Point(296, 1);
             this.painBox.Name = "painBox";
-            this.painBox.Size = new System.Drawing.Size(1046, 778);
+            this.painBox.Size = new System.Drawing.Size(971, 781);
             this.painBox.TabIndex = 0;
             this.painBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseDown);
-            this.painBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseUp);
             // 
             // painter
             // 
@@ -55,31 +59,44 @@
             // 
             this.btPaint.Location = new System.Drawing.Point(12, 12);
             this.btPaint.Name = "btPaint";
-            this.btPaint.Size = new System.Drawing.Size(188, 87);
+            this.btPaint.Size = new System.Drawing.Size(260, 87);
             this.btPaint.TabIndex = 1;
-            this.btPaint.Text = "button1";
+            this.btPaint.Text = "Отрисовать объекты";
             this.btPaint.UseVisualStyleBackColor = true;
+            this.btPaint.Click += new System.EventHandler(this.btPaint_Click);
             // 
             // btDelete
             // 
             this.btDelete.Location = new System.Drawing.Point(12, 125);
             this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(188, 94);
+            this.btDelete.Size = new System.Drawing.Size(260, 94);
             this.btDelete.TabIndex = 2;
-            this.btDelete.Text = "button2";
+            this.btDelete.Text = "Удалить объекты";
             this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
+            // labelNumber
+            // 
+            this.labelNumber.AutoSize = true;
+            this.labelNumber.Location = new System.Drawing.Point(8, 234);
+            this.labelNumber.Name = "labelNumber";
+            this.labelNumber.Size = new System.Drawing.Size(136, 20);
+            this.labelNumber.TabIndex = 3;
+            this.labelNumber.Text = "кол-во объектов";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 781);
+            this.Controls.Add(this.labelNumber);
             this.Controls.Add(this.btDelete);
             this.Controls.Add(this.btPaint);
             this.Controls.Add(this.painBox);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -89,6 +106,7 @@
         private System.Windows.Forms.ContextMenuStrip painter;
         private System.Windows.Forms.Button btPaint;
         private System.Windows.Forms.Button btDelete;
+        private System.Windows.Forms.Label labelNumber;
     }
 }
 

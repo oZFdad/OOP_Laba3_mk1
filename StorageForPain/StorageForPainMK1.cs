@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Threading;
 
-namespace StorageForPain
+namespace StorageForPainDLL
 {
     public class Vbr
     {
-        public int x, y;
-        public double r;
+        public int x, y, r;
+        //public double r;
 
         public Vbr(Random rnd)
         {
             x = rnd.Next(-100, 100);
             y = rnd.Next(-100, 100);
-            r = rnd.NextDouble() * 10;
+            //r = rnd.NextDouble() * 10;
+            r = rnd.Next(0, 50);
         }
 
-        public Vbr(int x, int y, double r)
+        public Vbr(int x, int y, int r)
         {
             this.x = x;
             this.y = y;
@@ -25,9 +26,9 @@ namespace StorageForPain
 
     public abstract class Shape
     {
-        protected int x, y;
-        protected double r;
-        protected bool flag = false;
+        public int x, y, r;
+        //public double r;
+        public bool flag = false;
 
         public Shape(Vbr value)
         {
@@ -36,7 +37,7 @@ namespace StorageForPain
             r = value.r;
         }
 
-        public Shape(int x1, int y1, double r1)
+        public Shape(int x1, int y1, int r1)
         {
             x = x1;
             y = y1;
@@ -98,9 +99,9 @@ namespace StorageForPain
         {
         }
 
-        //public Circle(int x1, int y1, double r1) : base(x1, y1, r1)  //как правильно?
-        //{
-        //}
+        public Circle(int x1, int y1, int r1) : base(x1, y1, r1)  //как правильно?
+        {
+        }
 
         public override void ChangeR(Vbr track)
         {
@@ -226,6 +227,7 @@ namespace StorageForPain
         public void DeleteAll()
         {
             Array.Clear(_box, 0, _index);
+            _index = 0;
         }
 
         public int GetMaxIdex()

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using StorageForPain;
+using StorageForPainDLL;
 
 
 namespace OOP_Laba3_mk2

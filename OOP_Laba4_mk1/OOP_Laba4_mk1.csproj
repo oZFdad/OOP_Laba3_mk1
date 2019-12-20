@@ -80,9 +80,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StorageForPain\StorageForPain.csproj">
+    <ProjectReference Include="..\StorageForPain\StorageForPainDLL.csproj">
       <Project>{067057b0-0e3c-45f9-a4d0-240e4786b366}</Project>
-      <Name>StorageForPain</Name>
+      <Name>StorageForPainDLL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
