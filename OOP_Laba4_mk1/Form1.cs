@@ -15,6 +15,7 @@ namespace OOP_Laba4_mk1
     public partial class Form1 : Form
     {
         private Storage _storage = new Storage(10);
+        private bool creatCircleOnPicture = true;
         public Form1()
         {
             InitializeComponent();
@@ -22,9 +23,12 @@ namespace OOP_Laba4_mk1
 
         private void painBox_MouseDown(object sender, MouseEventArgs e)
         {
-            Circle circle = new Circle(e.X, e.Y, 100);
-            _storage.CreatItem(circle);
-            labelNumber.Text ="Объектов в хранилище " + Convert.ToString(_storage.GetMaxIdex());
+            if (creatCircleOnPicture)
+            {
+                Circle circle = new Circle(e.X, e.Y, 100);
+                _storage.CreatItem(circle);
+                labelNumber.Text = "Объектов в хранилище " + Convert.ToString(_storage.GetMaxIdex());
+            }
         }
 
         private void btPaint_Click(object sender, EventArgs e)
@@ -34,12 +38,14 @@ namespace OOP_Laba4_mk1
                 Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
                 Graphics graph = Graphics.FromImage(bmp);
                 Pen pen = new Pen(Color.Red);
+                pen.Color = Color.Blue;
                 Shape circle;
                 for (int i = 1; i <= _storage.GetMaxIdex(); i++)
                 {
                     circle = _storage.GetItem(i);
                     graph.DrawEllipse(pen, circle.x - circle.r / 2, circle.y - circle.r / 2, circle.r, circle.r);
                 }
+                creatCircleOnPicture = false;
                 painBox.BackgroundImage = bmp;
             }
         }
@@ -50,6 +56,7 @@ namespace OOP_Laba4_mk1
             labelNumber.Text = "Объектов в хранилище " + Convert.ToString(_storage.GetMaxIdex());
             Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
             Graphics graph = Graphics.FromImage(bmp);
+            creatCircleOnPicture = true;
             painBox.BackgroundImage = bmp;
         }
     }
