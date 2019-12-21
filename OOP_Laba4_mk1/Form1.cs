@@ -106,6 +106,7 @@ namespace OOP_Laba4_mk1
                     _storage.GetItem(i).Draw(bmp);
                 }
                 painBox.BackgroundImage = bmp;
+                labelNumber.Text = "Объектов в хранилище " + Convert.ToString(_storage.GetMaxIdex());
             }
         }
     }

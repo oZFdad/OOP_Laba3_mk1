@@ -174,7 +174,7 @@ namespace StorageForPainDLL
     public class Storage
     {
         Shape[] _box;
-        int _maxSize, _index = 0;
+        int _maxSize, lenght = 0;
 
         public Storage()
         {
@@ -190,7 +190,7 @@ namespace StorageForPainDLL
 
         private bool CheckSpace() // проверка свободных мест
         {
-            if (_index < _maxSize)
+            if (lenght < _maxSize)
             {
                 return true;
             }
@@ -214,8 +214,8 @@ namespace StorageForPainDLL
             {
                 AddSpace();
             }
-            _box[_index] = item;
-            _index++;
+            _box[lenght] = item;
+            lenght++;
         }
 
         public void CreatRandomItems (int numbers)
@@ -244,16 +244,16 @@ namespace StorageForPainDLL
 
         public void DeleteItem (int index)
         {
-            if (_index > 0)
+            if (lenght > 0)
             {
-                if (index <= _index)
+                if (index <= lenght)
                 {
-                    for (int i = index - 1; i < _index - 1; i++)
+                    for (int i = index - 1; i < lenght - 1; i++)
                     {
                         _box[i] = _box[i + 1];
                     }
-                    _index--;
-                    Array.Clear(_box, _index, 1);
+                    lenght--;
+                    Array.Clear(_box, lenght, 1);
                     //Console.WriteLine("Удален {0}-й элемент", index);
                 }
             }
@@ -265,10 +265,10 @@ namespace StorageForPainDLL
 
         public void DeleteItem()
         {
-            if (_index > 0)
+            if (lenght > 0)
             {
-                _index--;
-                Array.Clear(_box, _index, 1);
+                lenght--;
+                Array.Clear(_box, lenght, 1);
             }
             else
             {
@@ -278,13 +278,13 @@ namespace StorageForPainDLL
 
         public void DeleteAll()
         {
-            Array.Clear(_box, 0, _index);
-            _index = 0;
+            Array.Clear(_box, 0, lenght);
+            lenght = 0;
         }
 
         public int GetMaxIdex()
         {
-            return _index;
+            return lenght;
         }
 
         public Shape GetItem(int index)
@@ -294,7 +294,7 @@ namespace StorageForPainDLL
 
         public Shape GetItem()
         {
-            return _box[_index-1];
+            return _box[lenght-1];
         }
 
         public void LetsDoSomething(int iterator)
@@ -324,15 +324,15 @@ namespace StorageForPainDLL
                 }
                 else if (rand == 1)
                 {
-                    if (_index != 0)
+                    if (lenght != 0)
                     {
-                        DeleteItem(rnd.Next(1, _index));
+                        DeleteItem(rnd.Next(1, lenght));
                         Console.WriteLine("Успешно удален элемент по индексу");
                     }
                 }
                 else if (rand == 2)
                 {
-                    if (_index != 0)
+                    if (lenght != 0)
                     {
                         DeleteItem();
                         Console.WriteLine("Успешно удален последний элемент");
@@ -344,16 +344,16 @@ namespace StorageForPainDLL
                 }
                 else if (rand == 4)
                 {
-                    if (_index != 0)
+                    if (lenght != 0)
                     {
                         GetItem().Display();
                     }
                 }
                 else
                 {
-                    if (_index != 0)
+                    if (lenght != 0)
                     {
-                        GetItem(rnd.Next(1, _index)).Display();
+                        GetItem(rnd.Next(1, lenght)).Display();
                     }
                 }
                 Thread.Sleep(20);
