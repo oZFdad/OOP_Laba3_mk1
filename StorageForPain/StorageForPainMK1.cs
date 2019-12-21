@@ -52,9 +52,13 @@ namespace StorageForPainDLL
         public abstract void Draw(Bitmap bmp);
     }
 
-    class Triangle : Shape
+    public class Triangle : Shape
     {
         public Triangle(Vbr value) : base(value)
+        {
+        }
+
+        public Triangle(int x1, int y1, int r1) : base(x1, y1, r1) 
         {
         }
 
@@ -84,9 +88,13 @@ namespace StorageForPainDLL
         }
     }
 
-    class Square : Shape
+    public class Square : Shape
     {
         public Square(Vbr value) : base(value)
+        {
+        }
+
+        public Square(int x1, int y1, int r1) : base(x1, y1, r1)
         {
         }
 
