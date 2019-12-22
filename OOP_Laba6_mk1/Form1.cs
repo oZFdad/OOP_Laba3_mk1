@@ -42,6 +42,10 @@ namespace OOP_Laba6_mk1
                     Triangle shape = new Triangle(e.X, e.Y, 100);
                     _storage.CreatItem(shape);
                 }
+                else
+                {
+
+                }
                 _storage.GetItem().Draw(bmp);
                 painBox.BackgroundImage = bmp;
             }
