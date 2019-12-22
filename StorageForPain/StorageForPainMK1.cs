@@ -7,13 +7,11 @@ namespace StorageForPainDLL
     public class Vbr
     {
         public int x, y, r;
-        //public double r;
 
         public Vbr(Random rnd)
         {
             x = rnd.Next(-100, 100);
             y = rnd.Next(-100, 100);
-            //r = rnd.NextDouble() * 10;
             r = rnd.Next(0, 50);
         }
 
@@ -28,8 +26,8 @@ namespace StorageForPainDLL
     public abstract class Shape
     {
         public int x, y, r;
-        //public double r;
         public bool flag = false;
+        public Color color = Color.Red;
 
         public Shape(Vbr value)
         {
@@ -46,25 +44,46 @@ namespace StorageForPainDLL
         }
 
         public abstract void Display();
-        public abstract void Move(Vbr track);
-        public abstract void ChangeR(Vbr track); // изменение радиуса
+        public virtual void Move(int dx, int dy)
+        {
+            x += dx;
+            y += dy;
+        }
+        public virtual void ChangeR(int dr)
+        {
+            r += dr;
+            if (r < 1)
+            {
+                r = 1;
+            }
+        }
         public abstract bool CheckPoint(int _x, int _y);
         public abstract void Draw(Bitmap bmp);
+        public void EditColor(Color newColor)
+        {
+            color = newColor;
+        }
+        public abstract void CheckBorderMove(int width, int height);
+        public abstract void CheckBorderChangeR(int width, int height);
     }
 
     public class Triangle : Shape
     {
+        private Point[] _points = new Point[4];
         public Triangle(Vbr value) : base(value)
         {
         }
 
         public Triangle(int x1, int y1, int r1) : base(x1, y1, r1) 
         {
-        }
-
-        public override void ChangeR(Vbr track)
-        {
-
+            _points[0].X = (int)(x1 - r1 / 2 * Math.Sqrt(3));
+            _points[0].Y = (y1 + r1 / 2);
+            _points[1].X = x1;
+            _points[1].Y = y1 - r1;
+            _points[2].X = (int)(x1 + r1 / 2 * Math.Sqrt(3));
+            _points[2].Y = (y1 + r1 / 2);
+            _points[3].X = _points[0].X;
+            _points[3].Y = _points[0].Y;
         }
 
         public override void Display()
@@ -72,19 +91,109 @@ namespace StorageForPainDLL
             Console.WriteLine("Это правильный треугольник с координатами центра описаной окружности Х={0} Y={1} и радиусом R={2}", x, y, r);
         }
 
-        public override void Move(Vbr track)
+        private void CountPoints()
         {
-
+            _points[0].X = (int)(x - r / 2 * Math.Sqrt(3));
+            _points[0].Y = (y + r / 2);
+            _points[1].X = x;
+            _points[1].Y = y - r;
+            _points[2].X = (int)(x + r / 2 * Math.Sqrt(3));
+            _points[2].Y = (y + r / 2);
+            _points[3].X = _points[0].X;
+            _points[3].Y = _points[0].Y;
         }
 
-        public override bool CheckPoint(int _x, int _y)
+        public override void Move(int dx, int dy)
         {
-            return false;
+            x += dx;
+            y += dy;
+            for(int i = 0; i < _points.Length; i++)
+            {
+                _points[i].X += dx;
+                _points[i].Y += dy;
+            }
+        }
+
+        public override void ChangeR(int dr)
+        {
+            r += dr;
+            if (r < 1)
+            {
+                r = 1;
+            }
+            CountPoints();
+        }
+
+        public override bool CheckPoint(int dx, int dy)
+        {
+            var p1 = (_points[0].X - dx) * (_points[1].Y - _points[0].Y) - (_points[1].X - _points[0].X) * (_points[0].Y - dy);
+            var p2 = (_points[1].X - dx) * (_points[2].Y - _points[1].Y) - (_points[2].X - _points[1].X) * (_points[1].Y - dy);
+            var p3 = (_points[2].X - dx) * (_points[0].Y - _points[2].Y) - (_points[0].X - _points[2].X) * (_points[2].Y - dy);
+            if(p1 <= 0 && p2 <= 0 && p3 <= 0|| p1 >= 0 && p2 >= 0 && p3 >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void Draw(Bitmap bmp)
         {
-            
+            Graphics graph = Graphics.FromImage(bmp);
+            Pen pen;
+            if (flag)
+            {
+                pen = new Pen(color, 10);
+            }
+            else
+            {
+                pen = new Pen(color);
+            }
+            graph.DrawLines(pen, _points);
+        }
+
+        public override void CheckBorderMove(int width, int height) // достаточное условия, не предусматривает вращения
+        {
+            if (_points[0].X <= 0)
+            {
+                x = (int)Math.Ceiling(r / 2 * Math.Sqrt(3));
+            }
+            if (_points[2].X >= width)
+            {
+                x = width - (int)Math.Ceiling(r / 2 * Math.Sqrt(3));
+            }
+            if (_points[1].Y <= 0)
+            {
+                y = r;
+            }
+            if (_points[0].Y >= height)
+            {
+                y = height - r / 2 - 1;
+            }
+            CountPoints();
+        }
+
+        public override void CheckBorderChangeR(int width, int height)
+        {
+            if (_points[0].X <= 0)
+            {
+                r = (int)Math.Ceiling(x * 2 / Math.Sqrt(3));
+            }
+            if (_points[2].X >= width)
+            {
+                r = (int)Math.Ceiling((width -  x) * 2 / Math.Sqrt(3));
+            }
+            if (_points[1].Y <= 0)
+            {
+                r = y;
+            }
+            if (_points[0].Y >= height)//
+            {
+                r = (height - y) * 2 - 1;
+            }
+            CountPoints();
         }
     }
 
@@ -98,29 +207,75 @@ namespace StorageForPainDLL
         {
         }
 
-        public override void ChangeR(Vbr track)
-        {
-
-        }
-
         public override void Display()
         {
             Console.WriteLine("Это квадрат с координатами центра описаной окружности Х={0} Y={1} и радиусом R={2}", x, y, r);
         }
 
-        public override void Move(Vbr track)
+        public override bool CheckPoint(int dx, int dy)
         {
-
-        }
-
-        public override bool CheckPoint(int _x, int _y)
-        {
-            return false;
+            if (dx >= (float)(x - r / Math.Sqrt(2)) && dx <= (float)(x + r / Math.Sqrt(2)) && dy >= (float)(y - r / Math.Sqrt(2)) && dy <= (float)(y + r / Math.Sqrt(2)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void Draw(Bitmap bmp)
         {
+            Graphics graph = Graphics.FromImage(bmp);
+            Pen pen;
+            if (flag)
+            {
+                pen = new Pen(color, 10);
+            }
+            else
+            {
+                pen = new Pen(color);
+            }
+            graph.DrawRectangle(pen, (float)(x - r / Math.Sqrt(2)), (float)(y - r / Math.Sqrt(2)), (float)(2 * r / Math.Sqrt(2)), (float)(2 * r / Math.Sqrt(2)));
+        }
 
+        public override void CheckBorderMove(int width, int height)
+        {
+            if (x - r / Math.Sqrt(2) <= 0)
+            {
+                x = (int)Math.Ceiling(r / Math.Sqrt(2));
+            }
+            if (x + r / Math.Sqrt(2) >= width)
+            {
+                x = width - (int)Math.Ceiling(r / Math.Sqrt(2));
+            }
+            if (y - r / Math.Sqrt(2) <= 0)
+            {
+                y = (int)Math.Ceiling(r / Math.Sqrt(2));
+            }
+            if (y + r / Math.Sqrt(2) >= height)
+            {
+                y = height - (int)Math.Ceiling(r / Math.Sqrt(2));
+            }
+        }
+        public override void CheckBorderChangeR(int width, int height)
+        {
+            if (x - r / Math.Sqrt(2) <= 0)
+            {
+                r = (int)Math.Ceiling(x * Math.Sqrt(2));
+            }
+            if (x + r / Math.Sqrt(2) >= width)
+            {
+                r = (int)Math.Ceiling((width - x) * Math.Sqrt(2));
+            }
+            if (y - r / Math.Sqrt(2) <= 0)
+            {
+                r = (int)Math.Ceiling(y * Math.Sqrt(2));
+            }
+            if (y + r / Math.Sqrt(2) >= height)
+            {
+                r = (int)Math.Ceiling((height - y) * Math.Sqrt(2));
+            }
         }
     }
 
@@ -134,19 +289,9 @@ namespace StorageForPainDLL
         {
         }
 
-        public override void ChangeR(Vbr track)
-        {
-
-        }
-
         public override void Display()
         {
             Console.WriteLine("Это окружность с центром Х={0} Y={1} и радиусом R={2}", x, y, r);
-        }
-
-        public override void Move(Vbr track)
-        {
-
         }
 
         public override bool CheckPoint(int dx, int dy)
@@ -165,17 +310,56 @@ namespace StorageForPainDLL
 
         public override void Draw(Bitmap bmp)
         {
-            Graphics graph = Graphics.FromImage(bmp);
             Pen pen;
+            Graphics graph = Graphics.FromImage(bmp);
             if (flag)
             {
-                pen = new Pen(Color.Blue);
+                pen = new Pen(color, 10);
             }
             else
             {
-                pen = new Pen(Color.Red);
+                pen = new Pen(color);
             }
             graph.DrawEllipse(pen, x - r, y - r, 2*r, 2*r);
+        }
+
+        public override void CheckBorderMove(int width, int height)
+        {
+            if (x - r <= 0)
+            {
+                x = r;
+            }
+            if (x + r >= width)
+            {
+                x = width - r;
+            }
+            if (y - r <= 0)
+            {
+                y = r;
+            }
+            if (y + r >= height)
+            {
+                y = height - r;
+            }
+        }
+        public override void CheckBorderChangeR(int width, int height)
+        {
+            if (x - r <= 0)
+            {
+                r = x;
+            }
+            if (x + r >= width)
+            {
+                r = width - x;
+            }
+            if (y - r <= 0)
+            {
+                r = y;
+            }
+            if (y + r >= height)
+            {
+                r = height - y;
+            }
         }
     }
 

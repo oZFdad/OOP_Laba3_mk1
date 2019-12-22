@@ -10,6 +10,7 @@ namespace OOP_Laba4_mk1
     {
         private Storage _storage = new Storage(10);
         private bool creatCircleOnPicture = true;
+        public Pen pen = new Pen(Color.Red);
         public Form1()
         {
             InitializeComponent();
