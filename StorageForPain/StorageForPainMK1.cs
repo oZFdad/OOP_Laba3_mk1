@@ -247,7 +247,7 @@ namespace StorageForPainDLL
             }
             if (x + r / Math.Sqrt(2) >= width)
             {
-                x = width - (int)Math.Ceiling(r / Math.Sqrt(2));
+                x = width - (int)Math.Ceiling(r / Math.Sqrt(2)) - 1;
             }
             if (y - r / Math.Sqrt(2) <= 0)
             {
@@ -255,7 +255,7 @@ namespace StorageForPainDLL
             }
             if (y + r / Math.Sqrt(2) >= height)
             {
-                y = height - (int)Math.Ceiling(r / Math.Sqrt(2));
+                y = height - (int)Math.Ceiling(r / Math.Sqrt(2)) - 1;
             }
         }
         public override void CheckBorderChangeR(int width, int height)
@@ -266,7 +266,7 @@ namespace StorageForPainDLL
             }
             if (x + r / Math.Sqrt(2) >= width)
             {
-                r = (int)Math.Ceiling((width - x) * Math.Sqrt(2));
+                r = (int)Math.Ceiling((width - x) * Math.Sqrt(2)) - 1;
             }
             if (y - r / Math.Sqrt(2) <= 0)
             {
@@ -274,7 +274,7 @@ namespace StorageForPainDLL
             }
             if (y + r / Math.Sqrt(2) >= height)
             {
-                r = (int)Math.Ceiling((height - y) * Math.Sqrt(2));
+                r = (int)Math.Ceiling((height - y) * Math.Sqrt(2)) - 1;
             }
         }
     }
