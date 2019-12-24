@@ -52,17 +52,17 @@ namespace OOP_Laba6_mk1
                 if (change == "Circle")
                 {
                     Circle shape = new Circle(e.X, e.Y, 100);
-                    _storage.CreatItem(shape);
+                    _storage.AddItem(shape);
                 }
                 else if (change == "Square")
                 {
                     Square shape = new Square(e.X, e.Y, 100);
-                    _storage.CreatItem(shape);
+                    _storage.AddItem(shape);
                 }
                 else if (change=="Triangle")
                 {
                     Triangle shape = new Triangle(e.X, e.Y, 100);
-                    _storage.CreatItem(shape);
+                    _storage.AddItem(shape);
                 }
                 else
                 {

@@ -21,15 +21,15 @@ namespace OOP_Laba4_mk1
             if (creatCircleOnPicture)
             {
                 Circle circle = new Circle(e.X, e.Y, 100);
-                _storage.CreatItem(circle);
+                _storage.AddItem(circle);
                 labelNumber.Text = "Объектов в хранилище " + Convert.ToString(_storage.GetMaxIdex());
             }
             else
             {
-                for (int i=1;i<=_storage.GetMaxIdex(); i++)
+                for (int i = 1; i <= _storage.GetMaxIdex(); i++)
                 {
                     var shape = _storage.GetItem(i);
-                    if(shape.CheckPoint(e.X, e.Y))
+                    if (shape.CheckPoint(e.X, e.Y))
                     {
                         if (shape.flag)
                         {
@@ -103,6 +103,11 @@ namespace OOP_Laba4_mk1
                 painBox.BackgroundImage = bmp;
                 labelNumber.Text = "Объектов в хранилище " + Convert.ToString(_storage.GetMaxIdex());
             }
+        }
+
+        private void painBox_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(pen, 1, 1, 400, 400);
         }
     }
 }

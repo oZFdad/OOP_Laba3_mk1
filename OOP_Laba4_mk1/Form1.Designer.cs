@@ -48,6 +48,7 @@
             this.painBox.Name = "painBox";
             this.painBox.Size = new System.Drawing.Size(863, 625);
             this.painBox.TabIndex = 0;
+            this.painBox.Paint += new System.Windows.Forms.PaintEventHandler(this.painBox_Paint);
             this.painBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseDown);
             // 
             // painter

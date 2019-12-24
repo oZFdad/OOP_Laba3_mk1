@@ -380,7 +380,7 @@ namespace StorageForPainDLL
             _box = new Shape[_maxSize + 1];
         }
 
-        private bool CheckSpace() // проверка свободных мест
+        private bool CheckSpace() 
         {
             if (lenght < _maxSize)
             {
@@ -400,38 +400,14 @@ namespace StorageForPainDLL
             _maxSize = _maxSize * 2;
         }
 
-        public void CreatItem (Shape item)
+        public void AddItem (Shape item)
         {
-            if (!CheckSpace()) // сломал голову, как правильно ????
+            if (!CheckSpace()) 
             {
                 AddSpace();
             }
             _box[lenght] = item;
             lenght++;
-        }
-
-        public void CreatRandomItems (int numbers)
-        {
-            Random rnd = new Random();
-            int rand;
-            for (int i = 0; i < numbers; i++)
-            {
-                rand = rnd.Next(0, 3);
-                Vbr core = new Vbr(rnd);
-                if (rand == 0)
-                {
-                    CreatItem(new Circle(core));
-                }
-                else if (rand == 1)
-                {
-                    CreatItem(new Triangle(core));
-                }
-                else
-                {
-                    CreatItem(new Square(core));
-                }
-                Thread.Sleep(20);
-            }
         }
 
         public void DeleteItem (int index)
@@ -446,7 +422,6 @@ namespace StorageForPainDLL
                     }
                     lenght--;
                     Array.Clear(_box, lenght, 1);
-                    //Console.WriteLine("Удален {0}-й элемент", index);
                 }
             }
             else
@@ -487,70 +462,6 @@ namespace StorageForPainDLL
         public Shape GetItem()
         {
             return _box[lenght-1];
-        }
-
-        public void LetsDoSomething(int iterator)
-        {
-            Random rnd = new Random();
-            for(int i = 0; i < iterator; i++)
-            {
-                int rand;
-                Vbr core = new Vbr(rnd);
-                rand = rnd.Next(0, 6);
-                if (rand == 0) //Добавление элемента
-                {
-                    int buf = rnd.Next(0, 2);
-                    if (buf == 0)
-                    {
-                        CreatItem(new Circle(core));
-                    }
-                    else if (buf == 1)
-                    {
-                        CreatItem(new Triangle(core));
-                    }
-                    else
-                    {
-                        CreatItem(new Square(core));
-                    }
-                    Console.WriteLine("Успешно добавлен элемент");
-                }
-                else if (rand == 1)
-                {
-                    if (lenght != 0)
-                    {
-                        DeleteItem(rnd.Next(1, lenght));
-                        Console.WriteLine("Успешно удален элемент по индексу");
-                    }
-                }
-                else if (rand == 2)
-                {
-                    if (lenght != 0)
-                    {
-                        DeleteItem();
-                        Console.WriteLine("Успешно удален последний элемент");
-                    }
-                }
-                else if (rand == 3)
-                {
-                    Console.WriteLine(GetMaxIdex());
-                }
-                else if (rand == 4)
-                {
-                    if (lenght != 0)
-                    {
-                        GetItem().Display();
-                    }
-                }
-                else
-                {
-                    if (lenght != 0)
-                    {
-                        GetItem(rnd.Next(1, lenght)).Display();
-                    }
-                }
-                Thread.Sleep(20);
-            }
-            //Vbr random = new Vbr(rnd);
         }
     }
 }
