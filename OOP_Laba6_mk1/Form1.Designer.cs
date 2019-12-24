@@ -45,10 +45,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.painBox.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.painBox.Location = new System.Drawing.Point(237, 2);
+            this.painBox.Location = new System.Drawing.Point(304, 34);
             this.painBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.painBox.Name = "painBox";
-            this.painBox.Size = new System.Drawing.Size(852, 653);
+            this.painBox.Size = new System.Drawing.Size(875, 753);
             this.painBox.TabIndex = 0;
             this.painBox.TabStop = false;
             this.painBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseDown);
@@ -60,19 +60,19 @@
             "Circle",
             "Square",
             "Triangle"});
-            this.cbShapeChange.Location = new System.Drawing.Point(12, 10);
+            this.cbShapeChange.Location = new System.Drawing.Point(14, 12);
             this.cbShapeChange.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbShapeChange.Name = "cbShapeChange";
-            this.cbShapeChange.Size = new System.Drawing.Size(207, 24);
+            this.cbShapeChange.Size = new System.Drawing.Size(232, 28);
             this.cbShapeChange.TabIndex = 1;
             this.cbShapeChange.Text = "Выбрать фигуру";
             // 
             // btOnOffEdit
             // 
-            this.btOnOffEdit.Location = new System.Drawing.Point(12, 49);
+            this.btOnOffEdit.Location = new System.Drawing.Point(14, 61);
             this.btOnOffEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btOnOffEdit.Name = "btOnOffEdit";
-            this.btOnOffEdit.Size = new System.Drawing.Size(206, 44);
+            this.btOnOffEdit.Size = new System.Drawing.Size(232, 55);
             this.btOnOffEdit.TabIndex = 2;
             this.btOnOffEdit.Text = "Выключить режим добавления объектов";
             this.btOnOffEdit.UseVisualStyleBackColor = true;
@@ -81,26 +81,28 @@
             // cbColorChange
             // 
             this.cbColorChange.FormattingEnabled = true;
-            this.cbColorChange.Location = new System.Drawing.Point(13, 220);
+            this.cbColorChange.Location = new System.Drawing.Point(15, 275);
+            this.cbColorChange.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbColorChange.Name = "cbColorChange";
-            this.cbColorChange.Size = new System.Drawing.Size(206, 24);
+            this.cbColorChange.Size = new System.Drawing.Size(231, 28);
             this.cbColorChange.TabIndex = 3;
             this.cbColorChange.Text = "Выбери цвет";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 106);
+            this.label1.Location = new System.Drawing.Point(0, 132);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(231, 17);
+            this.label1.Size = new System.Drawing.Size(267, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "Работа с выделеными объектами";
             // 
             // btRUp
             // 
-            this.btRUp.Location = new System.Drawing.Point(13, 167);
+            this.btRUp.Location = new System.Drawing.Point(15, 209);
+            this.btRUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btRUp.Name = "btRUp";
-            this.btRUp.Size = new System.Drawing.Size(86, 23);
+            this.btRUp.Size = new System.Drawing.Size(97, 29);
             this.btRUp.TabIndex = 5;
             this.btRUp.Text = "Увеличить";
             this.btRUp.UseVisualStyleBackColor = true;
@@ -108,9 +110,10 @@
             // 
             // btRDown
             // 
-            this.btRDown.Location = new System.Drawing.Point(118, 167);
+            this.btRDown.Location = new System.Drawing.Point(133, 209);
+            this.btRDown.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btRDown.Name = "btRDown";
-            this.btRDown.Size = new System.Drawing.Size(100, 23);
+            this.btRDown.Size = new System.Drawing.Size(112, 29);
             this.btRDown.TabIndex = 6;
             this.btRDown.Text = "Уменьшить";
             this.btRDown.UseVisualStyleBackColor = true;
@@ -118,9 +121,10 @@
             // 
             // btChangeColor
             // 
-            this.btChangeColor.Location = new System.Drawing.Point(13, 251);
+            this.btChangeColor.Location = new System.Drawing.Point(15, 314);
+            this.btChangeColor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btChangeColor.Name = "btChangeColor";
-            this.btChangeColor.Size = new System.Drawing.Size(206, 44);
+            this.btChangeColor.Size = new System.Drawing.Size(232, 55);
             this.btChangeColor.TabIndex = 7;
             this.btChangeColor.Text = "Изменить цвет";
             this.btChangeColor.UseVisualStyleBackColor = true;
@@ -128,9 +132,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 654);
+            this.ClientSize = new System.Drawing.Size(1220, 818);
             this.Controls.Add(this.btChangeColor);
             this.Controls.Add(this.btRDown);
             this.Controls.Add(this.btRUp);

@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace StorageForPainDLL
 {
-    public class Vbr
+    public class Vbr  //генератор случайных входных данных для создания фигур
     {
         public int x, y, r;
 
@@ -154,7 +154,7 @@ namespace StorageForPainDLL
             graph.DrawLines(pen, _points);
         }
 
-        public override void CheckBorderMove(int width, int height) // достаточное условия, не предусматривает вращения
+        public override void CheckBorderMove(int width, int height) // достаточное условие, не предусматривает вращения
         {
             if (_points[0].X <= 0)
             {
@@ -162,7 +162,7 @@ namespace StorageForPainDLL
             }
             if (_points[2].X >= width)
             {
-                x = width - (int)Math.Ceiling(r / 2 * Math.Sqrt(3));
+                x = width - (int)Math.Ceiling(r / 2 * Math.Sqrt(3)) - 1;
             }
             if (_points[1].Y <= 0)
             {
@@ -183,7 +183,7 @@ namespace StorageForPainDLL
             }
             if (_points[2].X >= width)
             {
-                r = (int)Math.Ceiling((width -  x) * 2 / Math.Sqrt(3));
+                r = (int)Math.Ceiling((width -  x) * 2 / Math.Sqrt(3)) - 1;
             }
             if (_points[1].Y <= 0)
             {
@@ -270,7 +270,7 @@ namespace StorageForPainDLL
             }
             if (y - r / Math.Sqrt(2) <= 0)
             {
-                r = (int)Math.Ceiling(y * Math.Sqrt(2));
+                r = (int)Math.Ceiling(y * Math.Sqrt(2)) - 1;
             }
             if (y + r / Math.Sqrt(2) >= height)
             {
@@ -331,7 +331,7 @@ namespace StorageForPainDLL
             }
             if (x + r >= width)
             {
-                x = width - r;
+                x = width - r -1;
             }
             if (y - r <= 0)
             {
@@ -339,7 +339,7 @@ namespace StorageForPainDLL
             }
             if (y + r >= height)
             {
-                y = height - r;
+                y = height - r - 1;
             }
         }
         public override void CheckBorderChangeR(int width, int height)
@@ -350,7 +350,7 @@ namespace StorageForPainDLL
             }
             if (x + r >= width)
             {
-                r = width - x;
+                r = width - x - 1;
             }
             if (y - r <= 0)
             {
@@ -358,7 +358,7 @@ namespace StorageForPainDLL
             }
             if (y + r >= height)
             {
-                r = height - y;
+                r = height - y - 1;
             }
         }
     }
