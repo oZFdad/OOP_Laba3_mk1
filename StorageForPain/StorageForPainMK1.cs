@@ -58,7 +58,7 @@ namespace StorageForPainDLL
             }
         }
         public abstract bool CheckPoint(int _x, int _y);
-        public abstract void Draw(Bitmap bmp);
+        public abstract void Draw(Graphics graph);
         public void EditColor(Color newColor)
         {
             color = newColor;
@@ -139,9 +139,9 @@ namespace StorageForPainDLL
             }
         }
 
-        public override void Draw(Bitmap bmp)
+        public override void Draw(Graphics graph)
         {
-            Graphics graph = Graphics.FromImage(bmp);
+            //Graphics graph = Graphics.FromImage(bmp);
             Pen pen;
             if (flag)
             {
@@ -224,9 +224,9 @@ namespace StorageForPainDLL
             }
         }
 
-        public override void Draw(Bitmap bmp)
+        public override void Draw(Graphics graph)
         {
-            Graphics graph = Graphics.FromImage(bmp);
+            //Graphics graph = Graphics.FromImage(bmp);
             Pen pen;
             if (flag)
             {
@@ -308,10 +308,10 @@ namespace StorageForPainDLL
             }
         }
 
-        public override void Draw(Bitmap bmp)
+        public override void Draw(Graphics graph)
         {
             Pen pen;
-            Graphics graph = Graphics.FromImage(bmp);
+            //Graphics graph = Graphics.FromImage(bmp);
             if (flag)
             {
                 pen = new Pen(color, 10);
