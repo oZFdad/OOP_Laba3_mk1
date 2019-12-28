@@ -29,6 +29,19 @@ namespace OOP_Laba6_mk1
             cbColorChange.Items.AddRange(_colors.Select(c => c.Name).ToArray());
         }
 
+        private void DeleteMarkedItems()
+        {
+            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            {
+                if (_storage.GetItem(i).flag)
+                {
+                    _storage.DeleteItem(i);
+                    i--;
+                }
+            }
+            painBox.Refresh();
+        }
+
         private Color GetCurrentSelectedColor()
         {
             var colorName = (string)cbColorChange.SelectedItem;
@@ -42,75 +55,54 @@ namespace OOP_Laba6_mk1
 
         private void painBox_MouseDown(object sender, MouseEventArgs e)
         {
-            Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
-            //var color = GetCurrentSelectedColor();
-            //if (color == default(Color)) return;
-
-            if (creatShapeOnPicture)
+            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
             {
-                var change = cbShapeChange.Text;
-                if (change == "Circle")
+                var shape = _storage.GetItem(i);
+                if (shape.CheckPoint(e.X, e.Y))
                 {
-                    Circle shape = new Circle(e.X, e.Y, 100);
-                    _storage.AddItem(shape);
-                }
-                else if (change == "Square")
-                {
-                    Square shape = new Square(e.X, e.Y, 100);
-                    _storage.AddItem(shape);
-                }
-                else if (change=="Triangle")
-                {
-                    Triangle shape = new Triangle(e.X, e.Y, 100);
-                    _storage.AddItem(shape);
-                }
-                else
-                {
-                    return;
+                    if (shape.flag)
+                    {
+                        shape.flag = false;
+                    }
+                    else
+                    {
+                        shape.flag = true;
+                    }
+                    creatShapeOnPicture = false;
                 }
             }
-            else
+            if (creatShapeOnPicture)
             {
-                for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+                if (creatShapeOnPicture)
                 {
-                    var shape = _storage.GetItem(i);
-                    if (shape.CheckPoint(e.X, e.Y))
+                    var change = cbShapeChange.Text;
+                    if (change == "Circle")
                     {
-                        if (shape.flag)
-                        {
-                            shape.flag = false;
-                        }
-                        else
-                        {
-                            shape.flag = true;
-                        }
+                        Circle shape = new Circle(e.X, e.Y, 100);
+                        _storage.AddItem(shape);
+                    }
+                    else if (change == "Square")
+                    {
+                        Square shape = new Square(e.X, e.Y, 100);
+                        _storage.AddItem(shape);
+                    }
+                    else if (change == "Triangle")
+                    {
+                        Triangle shape = new Triangle(e.X, e.Y, 100);
+                        _storage.AddItem(shape);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Выберите тип фигуры", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
                     }
                 }
             }
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
-            {
-                _storage.GetItem(i).Draw(bmp);
-            }
-            painBox.BackgroundImage = bmp;
-        }
-
-        private void bt_Click(object sender, EventArgs e)
-        {
-            if (creatShapeOnPicture)
-            {
-                creatShapeOnPicture = false;
-                btOnOffEdit.Text = "Включить режим добавления объектов";
-            }
-            else
-            {
-                creatShapeOnPicture = true;
-                btOnOffEdit.Text = "Выключить режим добавления объектов";
-            }
+            creatShapeOnPicture = true;
+            painBox.Refresh();
         }
 
         private void btRUp_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
             for (int i = 1; i <= _storage.GetMaxIdex(); i++)
             {
                 if (_storage.GetItem(i).flag)
@@ -119,16 +111,11 @@ namespace OOP_Laba6_mk1
                     _storage.GetItem(i).CheckBorderChangeR(painBox.Width, painBox.Height);
                 }
             }
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
-            {
-                _storage.GetItem(i).Draw(bmp);
-            }
-            painBox.BackgroundImage = bmp;
+            painBox.Refresh();
         }
 
         private void btRDown_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
             for (int i = 1; i <= _storage.GetMaxIdex(); i++)
             {
                 if (_storage.GetItem(i).flag)
@@ -136,16 +123,11 @@ namespace OOP_Laba6_mk1
                     _storage.GetItem(i).ChangeR(-10);
                 }
             }
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
-            {
-                _storage.GetItem(i).Draw(bmp);
-            }
-            painBox.BackgroundImage = bmp;
+            painBox.Refresh();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
             for (int i = 1; i <= _storage.GetMaxIdex(); i++)
             {
                 if (e.KeyCode == Keys.Left)
@@ -189,17 +171,25 @@ namespace OOP_Laba6_mk1
                     }
                 }
             }
-            
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
-            {
-                _storage.GetItem(i).Draw(bmp);
-            }
-            painBox.BackgroundImage = bmp;
+            painBox.Refresh();
         }
 
         private void btChangeColor_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(painBox.Width, painBox.Height);
+            
+        }
+
+        private void painBox_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics pain = e.Graphics;
+            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            {
+                _storage.GetItem(i).Draw(pain);
+            }
+        }
+
+        private void cbColorChange_SelectedIndexChanged(object sender, EventArgs e)
+        {
             for (int i = 1; i <= _storage.GetMaxIdex(); i++)
             {
                 if (_storage.GetItem(i).flag)
@@ -207,11 +197,7 @@ namespace OOP_Laba6_mk1
                     _storage.GetItem(i).color = GetCurrentSelectedColor();
                 }
             }
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
-            {
-                _storage.GetItem(i).Draw(bmp);
-            }
-            painBox.BackgroundImage = bmp;
+            painBox.Refresh();
         }
     }
 }

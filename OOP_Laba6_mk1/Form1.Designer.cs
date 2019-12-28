@@ -30,12 +30,10 @@
         {
             this.painBox = new System.Windows.Forms.PictureBox();
             this.cbShapeChange = new System.Windows.Forms.ComboBox();
-            this.btOnOffEdit = new System.Windows.Forms.Button();
             this.cbColorChange = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btRUp = new System.Windows.Forms.Button();
             this.btRDown = new System.Windows.Forms.Button();
-            this.btChangeColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.painBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,6 +49,7 @@
             this.painBox.Size = new System.Drawing.Size(875, 753);
             this.painBox.TabIndex = 0;
             this.painBox.TabStop = false;
+            this.painBox.Paint += new System.Windows.Forms.PaintEventHandler(this.painBox_Paint);
             this.painBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseDown);
             // 
             // cbShapeChange
@@ -67,17 +66,6 @@
             this.cbShapeChange.TabIndex = 1;
             this.cbShapeChange.Text = "Выбрать фигуру";
             // 
-            // btOnOffEdit
-            // 
-            this.btOnOffEdit.Location = new System.Drawing.Point(14, 61);
-            this.btOnOffEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btOnOffEdit.Name = "btOnOffEdit";
-            this.btOnOffEdit.Size = new System.Drawing.Size(232, 55);
-            this.btOnOffEdit.TabIndex = 2;
-            this.btOnOffEdit.Text = "Выключить режим добавления объектов";
-            this.btOnOffEdit.UseVisualStyleBackColor = true;
-            this.btOnOffEdit.Click += new System.EventHandler(this.bt_Click);
-            // 
             // cbColorChange
             // 
             this.cbColorChange.FormattingEnabled = true;
@@ -87,6 +75,7 @@
             this.cbColorChange.Size = new System.Drawing.Size(231, 28);
             this.cbColorChange.TabIndex = 3;
             this.cbColorChange.Text = "Выбери цвет";
+            this.cbColorChange.SelectedIndexChanged += new System.EventHandler(this.cbColorChange_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -119,28 +108,15 @@
             this.btRDown.UseVisualStyleBackColor = true;
             this.btRDown.Click += new System.EventHandler(this.btRDown_Click);
             // 
-            // btChangeColor
-            // 
-            this.btChangeColor.Location = new System.Drawing.Point(15, 314);
-            this.btChangeColor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btChangeColor.Name = "btChangeColor";
-            this.btChangeColor.Size = new System.Drawing.Size(232, 55);
-            this.btChangeColor.TabIndex = 7;
-            this.btChangeColor.Text = "Изменить цвет";
-            this.btChangeColor.UseVisualStyleBackColor = true;
-            this.btChangeColor.Click += new System.EventHandler(this.btChangeColor_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1220, 818);
-            this.Controls.Add(this.btChangeColor);
             this.Controls.Add(this.btRDown);
             this.Controls.Add(this.btRUp);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbColorChange);
-            this.Controls.Add(this.btOnOffEdit);
             this.Controls.Add(this.cbShapeChange);
             this.Controls.Add(this.painBox);
             this.KeyPreview = true;
@@ -158,12 +134,10 @@
 
         private System.Windows.Forms.PictureBox painBox;
         private System.Windows.Forms.ComboBox cbShapeChange;
-        private System.Windows.Forms.Button btOnOffEdit;
         private System.Windows.Forms.ComboBox cbColorChange;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btRUp;
         private System.Windows.Forms.Button btRDown;
-        private System.Windows.Forms.Button btChangeColor;
     }
 }
 
