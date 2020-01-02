@@ -63,8 +63,8 @@ namespace StorageForPainDLL
         {
             color = newColor;
         }
-        public abstract void CheckBorderMove(int width, int height);
-        public abstract void CheckBorderChangeR(int width, int height);
+        
+        public abstract bool CheckBorder(int width, int height);
     }
 
     public class Triangle : Shape
@@ -154,46 +154,25 @@ namespace StorageForPainDLL
             graph.DrawLines(pen, _points);
         }
 
-        public override void CheckBorderMove(int width, int height) // достаточное условие, не предусматривает вращения
+        public override bool CheckBorder(int width, int height)
         {
             if (_points[0].X <= 0)
             {
-                x = (int)Math.Ceiling(r / 2 * Math.Sqrt(3));
+                return false;
             }
             if (_points[2].X >= width)
             {
-                x = width - (int)Math.Ceiling(r / 2 * Math.Sqrt(3)) - 1;
+                return false;
             }
             if (_points[1].Y <= 0)
             {
-                y = r;
+                return false;
             }
             if (_points[0].Y >= height)
             {
-                y = height - r / 2 - 1;
+                return false;
             }
-            CountPoints();
-        }
-
-        public override void CheckBorderChangeR(int width, int height)
-        {
-            if (_points[0].X <= 0)
-            {
-                r = (int)Math.Ceiling(x * 2 / Math.Sqrt(3));
-            }
-            if (_points[2].X >= width)
-            {
-                r = (int)Math.Ceiling((width -  x) * 2 / Math.Sqrt(3)) - 1;
-            }
-            if (_points[1].Y <= 0)
-            {
-                r = y;
-            }
-            if (_points[0].Y >= height)//
-            {
-                r = (height - y) * 2 - 1;
-            }
-            CountPoints();
+            return true;
         }
     }
 
@@ -238,44 +217,26 @@ namespace StorageForPainDLL
             }
             graph.DrawRectangle(pen, (float)(x - r / Math.Sqrt(2)), (float)(y - r / Math.Sqrt(2)), (float)(2 * r / Math.Sqrt(2)), (float)(2 * r / Math.Sqrt(2)));
         }
-
-        public override void CheckBorderMove(int width, int height)
+        
+        public override bool CheckBorder(int width, int height)
         {
             if (x - r / Math.Sqrt(2) <= 0)
             {
-                x = (int)Math.Ceiling(r / Math.Sqrt(2));
+                return false;
             }
             if (x + r / Math.Sqrt(2) >= width)
             {
-                x = width - (int)Math.Ceiling(r / Math.Sqrt(2)) - 1;
+                return false;
             }
             if (y - r / Math.Sqrt(2) <= 0)
             {
-                y = (int)Math.Ceiling(r / Math.Sqrt(2));
+                return false;
             }
             if (y + r / Math.Sqrt(2) >= height)
             {
-                y = height - (int)Math.Ceiling(r / Math.Sqrt(2)) - 1;
+                return false;
             }
-        }
-        public override void CheckBorderChangeR(int width, int height)
-        {
-            if (x - r / Math.Sqrt(2) <= 0)
-            {
-                r = (int)Math.Ceiling(x * Math.Sqrt(2));
-            }
-            if (x + r / Math.Sqrt(2) >= width)
-            {
-                r = (int)Math.Ceiling((width - x) * Math.Sqrt(2)) - 1;
-            }
-            if (y - r / Math.Sqrt(2) <= 0)
-            {
-                r = (int)Math.Ceiling(y * Math.Sqrt(2)) - 1;
-            }
-            if (y + r / Math.Sqrt(2) >= height)
-            {
-                r = (int)Math.Ceiling((height - y) * Math.Sqrt(2)) - 1;
-            }
+            return true;
         }
     }
 
@@ -323,43 +284,25 @@ namespace StorageForPainDLL
             graph.DrawEllipse(pen, x - r, y - r, 2*r, 2*r);
         }
 
-        public override void CheckBorderMove(int width, int height)
+        public override bool CheckBorder(int width, int height)
         {
             if (x - r <= 0)
             {
-                x = r;
+                return false;
             }
             if (x + r >= width)
             {
-                x = width - r -1;
+                return false;
             }
             if (y - r <= 0)
             {
-                y = r;
+                return false;
             }
             if (y + r >= height)
             {
-                y = height - r - 1;
+                return false;
             }
-        }
-        public override void CheckBorderChangeR(int width, int height)
-        {
-            if (x - r <= 0)
-            {
-                r = x;
-            }
-            if (x + r >= width)
-            {
-                r = width - x - 1;
-            }
-            if (y - r <= 0)
-            {
-                r = y;
-            }
-            if (y + r >= height)
-            {
-                r = height - y - 1;
-            }
+            return true;
         }
     }
 

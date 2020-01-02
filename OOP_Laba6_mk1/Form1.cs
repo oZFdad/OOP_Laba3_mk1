@@ -79,17 +79,26 @@ namespace OOP_Laba6_mk1
                     if (change == "Circle")
                     {
                         Circle shape = new Circle(e.X, e.Y, 100);
-                        _storage.AddItem(shape);
+                        if (shape.CheckBorder(painBox.Width, painBox.Height))
+                        {
+                            _storage.AddItem(shape);   
+                        }
                     }
                     else if (change == "Square")
                     {
                         Square shape = new Square(e.X, e.Y, 100);
-                        _storage.AddItem(shape);
+                        if (shape.CheckBorder(painBox.Width, painBox.Height))
+                        {
+                            _storage.AddItem(shape);   
+                        }
                     }
                     else if (change == "Triangle")
                     {
                         Triangle shape = new Triangle(e.X, e.Y, 100);
-                        _storage.AddItem(shape);
+                        if (shape.CheckBorder(painBox.Width, painBox.Height))
+                        {
+                            _storage.AddItem(shape);   
+                        }
                     }
                     else
                     {
@@ -105,10 +114,14 @@ namespace OOP_Laba6_mk1
         {
             for (int i = 1; i <= _storage.GetMaxIdex(); i++)
             {
-                if (_storage.GetItem(i).flag)
+                if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                 {
-                    _storage.GetItem(i).ChangeR(10);
-                    _storage.GetItem(i).CheckBorderChangeR(painBox.Width, painBox.Height);
+                    _storage.GetItem(i).ChangeR(1);
+                    if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
+                    {
+                        _storage.GetItem(i).ChangeR(-1);
+                    }
+                    //_storage.GetItem(i).CheckBorderChangeR(painBox.Width, painBox.Height);
                 }
             }
             painBox.Refresh();
@@ -120,7 +133,7 @@ namespace OOP_Laba6_mk1
             {
                 if (_storage.GetItem(i).flag)
                 {
-                    _storage.GetItem(i).ChangeR(-10);
+                    _storage.GetItem(i).ChangeR(-1);
                 }
             }
             painBox.Refresh();
@@ -132,34 +145,50 @@ namespace OOP_Laba6_mk1
             {
                 if (e.KeyCode == Keys.Left)
                 {
-                    if (_storage.GetItem(i).flag)
+                    if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                     {
-                        _storage.GetItem(i).Move(-10, 0);
-                        _storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
+                        _storage.GetItem(i).Move(-1, 0);
+                        if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
+                        {
+                            _storage.GetItem(i).Move(1, 0);
+                        }
+                        //_storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
                     }
                 }
                 if (e.KeyCode == Keys.Right)
                 {
-                    if (_storage.GetItem(i).flag)
+                    if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                     {
-                        _storage.GetItem(i).Move(10, 0);
-                        _storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
+                        _storage.GetItem(i).Move(1, 0);
+                        if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
+                        {
+                            _storage.GetItem(i).Move(-1, 0);
+                        }
+                        //_storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
                     }
                 }
                 if (e.KeyCode == Keys.Up)
                 {
-                    if (_storage.GetItem(i).flag)
+                    if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                     {
-                        _storage.GetItem(i).Move(0, -10);
-                        _storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
+                        _storage.GetItem(i).Move(0, -1);
+                        if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
+                        {
+                            _storage.GetItem(i).Move(0, 1);
+                        }
+                        //_storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
                     }
                 }
                 if (e.KeyCode == Keys.Down)
                 {
-                    if (_storage.GetItem(i).flag)
+                    if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                     {
-                        _storage.GetItem(i).Move(0, 10);
-                        _storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
+                        _storage.GetItem(i).Move(0, 1);
+                        if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
+                        {
+                            _storage.GetItem(i).Move(0, -1);
+                        }
+                        //_storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
                     }
                 }
                 if (e.KeyCode == Keys.Delete)
