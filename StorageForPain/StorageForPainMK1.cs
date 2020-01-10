@@ -305,7 +305,7 @@ namespace StorageForPainDLL
 
     public class Group : Shape
     {
-        private Storage group;
+        private Storage _group = new Storage(10);
 
         public Group(Vbr value) : base(value)
         {

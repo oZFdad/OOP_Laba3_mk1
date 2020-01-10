@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btRUp = new System.Windows.Forms.Button();
             this.btRDown = new System.Windows.Forms.Button();
+            this.btCreatGroup = new System.Windows.Forms.Button();
+            this.btUnGroup = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.painBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,10 +45,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.painBox.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.painBox.Location = new System.Drawing.Point(304, 34);
-            this.painBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.painBox.Location = new System.Drawing.Point(203, 22);
+            this.painBox.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.painBox.Name = "painBox";
-            this.painBox.Size = new System.Drawing.Size(875, 753);
+            this.painBox.Size = new System.Drawing.Size(583, 489);
             this.painBox.TabIndex = 0;
             this.painBox.TabStop = false;
             this.painBox.Paint += new System.Windows.Forms.PaintEventHandler(this.painBox_Paint);
@@ -59,20 +61,20 @@
             "Circle",
             "Square",
             "Triangle"});
-            this.cbShapeChange.Location = new System.Drawing.Point(14, 12);
-            this.cbShapeChange.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbShapeChange.Location = new System.Drawing.Point(9, 8);
+            this.cbShapeChange.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.cbShapeChange.Name = "cbShapeChange";
-            this.cbShapeChange.Size = new System.Drawing.Size(232, 28);
+            this.cbShapeChange.Size = new System.Drawing.Size(156, 21);
             this.cbShapeChange.TabIndex = 1;
             this.cbShapeChange.Text = "Выбрать фигуру";
             // 
             // cbColorChange
             // 
             this.cbColorChange.FormattingEnabled = true;
-            this.cbColorChange.Location = new System.Drawing.Point(15, 275);
-            this.cbColorChange.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbColorChange.Location = new System.Drawing.Point(10, 179);
+            this.cbColorChange.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cbColorChange.Name = "cbColorChange";
-            this.cbColorChange.Size = new System.Drawing.Size(231, 28);
+            this.cbColorChange.Size = new System.Drawing.Size(155, 21);
             this.cbColorChange.TabIndex = 3;
             this.cbColorChange.Text = "Выбери цвет";
             this.cbColorChange.SelectedIndexChanged += new System.EventHandler(this.cbColorChange_SelectedIndexChanged);
@@ -80,18 +82,19 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 132);
+            this.label1.Location = new System.Drawing.Point(0, 86);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(267, 20);
+            this.label1.Size = new System.Drawing.Size(180, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Работа с выделеными объектами";
             // 
             // btRUp
             // 
-            this.btRUp.Location = new System.Drawing.Point(15, 209);
-            this.btRUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btRUp.Location = new System.Drawing.Point(10, 136);
+            this.btRUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btRUp.Name = "btRUp";
-            this.btRUp.Size = new System.Drawing.Size(97, 29);
+            this.btRUp.Size = new System.Drawing.Size(65, 19);
             this.btRUp.TabIndex = 5;
             this.btRUp.Text = "Увеличить";
             this.btRUp.UseVisualStyleBackColor = true;
@@ -99,20 +102,40 @@
             // 
             // btRDown
             // 
-            this.btRDown.Location = new System.Drawing.Point(133, 209);
-            this.btRDown.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btRDown.Location = new System.Drawing.Point(89, 136);
+            this.btRDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btRDown.Name = "btRDown";
-            this.btRDown.Size = new System.Drawing.Size(112, 29);
+            this.btRDown.Size = new System.Drawing.Size(75, 19);
             this.btRDown.TabIndex = 6;
             this.btRDown.Text = "Уменьшить";
             this.btRDown.UseVisualStyleBackColor = true;
             this.btRDown.Click += new System.EventHandler(this.btRDown_Click);
             // 
+            // btCreatGroup
+            // 
+            this.btCreatGroup.Location = new System.Drawing.Point(10, 207);
+            this.btCreatGroup.Name = "btCreatGroup";
+            this.btCreatGroup.Size = new System.Drawing.Size(154, 23);
+            this.btCreatGroup.TabIndex = 7;
+            this.btCreatGroup.Text = "Сгруппировать";
+            this.btCreatGroup.UseVisualStyleBackColor = true;
+            // 
+            // btUnGroup
+            // 
+            this.btUnGroup.Location = new System.Drawing.Point(10, 236);
+            this.btUnGroup.Name = "btUnGroup";
+            this.btUnGroup.Size = new System.Drawing.Size(154, 23);
+            this.btUnGroup.TabIndex = 8;
+            this.btUnGroup.Text = "Разгруппировать";
+            this.btUnGroup.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1220, 818);
+            this.ClientSize = new System.Drawing.Size(813, 532);
+            this.Controls.Add(this.btUnGroup);
+            this.Controls.Add(this.btCreatGroup);
             this.Controls.Add(this.btRDown);
             this.Controls.Add(this.btRUp);
             this.Controls.Add(this.label1);
@@ -120,7 +143,7 @@
             this.Controls.Add(this.cbShapeChange);
             this.Controls.Add(this.painBox);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -138,6 +161,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btRUp;
         private System.Windows.Forms.Button btRDown;
+        private System.Windows.Forms.Button btCreatGroup;
+        private System.Windows.Forms.Button btUnGroup;
     }
 }
 
