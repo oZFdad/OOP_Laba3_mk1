@@ -141,7 +141,6 @@ namespace StorageForPainDLL
 
         public override void Draw(Graphics graph)
         {
-            //Graphics graph = Graphics.FromImage(bmp);
             Pen pen;
             if (flag)
             {
@@ -205,7 +204,6 @@ namespace StorageForPainDLL
 
         public override void Draw(Graphics graph)
         {
-            //Graphics graph = Graphics.FromImage(bmp);
             Pen pen;
             if (flag)
             {
@@ -246,7 +244,7 @@ namespace StorageForPainDLL
         {
         }
 
-        public Circle(int x1, int y1, int r1) : base(x1, y1, r1)  //как правильно?
+        public Circle(int x1, int y1, int r1) : base(x1, y1, r1)  
         {
         }
 
@@ -272,7 +270,6 @@ namespace StorageForPainDLL
         public override void Draw(Graphics graph)
         {
             Pen pen;
-            //Graphics graph = Graphics.FromImage(bmp);
             if (flag)
             {
                 pen = new Pen(color, 10);
@@ -303,6 +300,39 @@ namespace StorageForPainDLL
                 return false;
             }
             return true;
+        }
+    }
+
+    public class Group : Shape
+    {
+        private Storage group;
+
+        public Group(Vbr value) : base(value)
+        {
+        }
+
+        public Group(int x1, int y1, int r1) : base(x1, y1, r1)
+        {
+        }
+
+        public override bool CheckBorder(int width, int height)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool CheckPoint(int _x, int _y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Display()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Draw(Graphics graph)
+        {
+            throw new NotImplementedException();
         }
     }
 

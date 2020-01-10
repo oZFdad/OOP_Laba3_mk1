@@ -43,10 +43,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.painBox.BackColor = System.Drawing.SystemColors.ControlDark;
             this.painBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.painBox.Location = new System.Drawing.Point(296, 1);
-            this.painBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.painBox.Location = new System.Drawing.Point(197, 1);
+            this.painBox.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.painBox.Name = "painBox";
-            this.painBox.Size = new System.Drawing.Size(971, 781);
+            this.painBox.Size = new System.Drawing.Size(647, 508);
             this.painBox.TabIndex = 0;
             this.painBox.Paint += new System.Windows.Forms.PaintEventHandler(this.painBox_Paint);
             this.painBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.painBox_MouseDown);
@@ -59,10 +59,10 @@
             // 
             // btDelMarked
             // 
-            this.btDelMarked.Location = new System.Drawing.Point(12, 12);
-            this.btDelMarked.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btDelMarked.Location = new System.Drawing.Point(8, 8);
+            this.btDelMarked.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btDelMarked.Name = "btDelMarked";
-            this.btDelMarked.Size = new System.Drawing.Size(260, 88);
+            this.btDelMarked.Size = new System.Drawing.Size(173, 57);
             this.btDelMarked.TabIndex = 1;
             this.btDelMarked.Text = "Удалить выделеные объекты клавиша delete";
             this.btDelMarked.UseVisualStyleBackColor = true;
@@ -70,10 +70,10 @@
             // 
             // btDelAll
             // 
-            this.btDelAll.Location = new System.Drawing.Point(12, 125);
-            this.btDelAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btDelAll.Location = new System.Drawing.Point(8, 81);
+            this.btDelAll.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btDelAll.Name = "btDelAll";
-            this.btDelAll.Size = new System.Drawing.Size(260, 94);
+            this.btDelAll.Size = new System.Drawing.Size(173, 61);
             this.btDelAll.TabIndex = 2;
             this.btDelAll.Text = "Удалить все объекты";
             this.btDelAll.UseVisualStyleBackColor = true;
@@ -82,23 +82,24 @@
             // labelNumber
             // 
             this.labelNumber.AutoSize = true;
-            this.labelNumber.Location = new System.Drawing.Point(8, 234);
+            this.labelNumber.Location = new System.Drawing.Point(5, 152);
+            this.labelNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNumber.Name = "labelNumber";
-            this.labelNumber.Size = new System.Drawing.Size(136, 20);
+            this.labelNumber.Size = new System.Drawing.Size(91, 13);
             this.labelNumber.TabIndex = 3;
             this.labelNumber.Text = "кол-во объектов";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 781);
+            this.ClientSize = new System.Drawing.Size(843, 508);
             this.Controls.Add(this.labelNumber);
             this.Controls.Add(this.btDelAll);
             this.Controls.Add(this.btDelMarked);
             this.Controls.Add(this.painBox);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
