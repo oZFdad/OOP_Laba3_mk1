@@ -73,37 +73,34 @@ namespace OOP_Laba6_mk1
             }
             if (creatShapeOnPicture)
             {
-                if (creatShapeOnPicture)
+                var change = cbShapeChange.Text;
+                if (change == "Circle")
                 {
-                    var change = cbShapeChange.Text;
-                    if (change == "Circle")
+                    Circle shape = new Circle(e.X, e.Y, 100);
+                    if (shape.CheckBorder(painBox.Width, painBox.Height))
                     {
-                        Circle shape = new Circle(e.X, e.Y, 100);
-                        if (shape.CheckBorder(painBox.Width, painBox.Height))
-                        {
-                            _storage.AddItem(shape);   
-                        }
+                        _storage.AddItem(shape);
                     }
-                    else if (change == "Square")
+                }
+                else if (change == "Square")
+                {
+                    Square shape = new Square(e.X, e.Y, 100);
+                    if (shape.CheckBorder(painBox.Width, painBox.Height))
                     {
-                        Square shape = new Square(e.X, e.Y, 100);
-                        if (shape.CheckBorder(painBox.Width, painBox.Height))
-                        {
-                            _storage.AddItem(shape);   
-                        }
+                        _storage.AddItem(shape);
                     }
-                    else if (change == "Triangle")
+                }
+                else if (change == "Triangle")
+                {
+                    Triangle shape = new Triangle(e.X, e.Y, 100);
+                    if (shape.CheckBorder(painBox.Width, painBox.Height))
                     {
-                        Triangle shape = new Triangle(e.X, e.Y, 100);
-                        if (shape.CheckBorder(painBox.Width, painBox.Height))
-                        {
-                            _storage.AddItem(shape);   
-                        }
+                        _storage.AddItem(shape);
                     }
-                    else
-                    {
-                        MessageBox.Show("Выберите тип фигуры", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
-                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выберите тип фигуры", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
                 }
             }
             creatShapeOnPicture = true;
@@ -227,6 +224,29 @@ namespace OOP_Laba6_mk1
                 }
             }
             painBox.Refresh();
+        }
+
+        private void btCreatGroup_Click(object sender, EventArgs e)
+        {
+            Storage bufStorage = new Storage();
+            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            {
+                if (_storage.GetItem(i).flag)
+                {
+                    bufStorage.AddItem(_storage.GetItem(i));
+                    _storage.DeleteItem(i);
+                    i--;
+                }
+            }
+            if (bufStorage.GetMaxIdex() != 0)
+            {
+                _storage.AddItem(new Group(bufStorage));
+            }
+        }
+
+        private void btUnGroup_Click(object sender, EventArgs e)
+        {
+            int a = 0;
         }
     }
 }

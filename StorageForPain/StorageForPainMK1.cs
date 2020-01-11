@@ -43,7 +43,13 @@ namespace StorageForPainDLL
             r = r1;
         }
 
+        public Shape()
+        {
+
+        }
+
         public abstract void Display();
+
         public virtual void Move(int dx, int dy)
         {
             x += dx;
@@ -315,14 +321,33 @@ namespace StorageForPainDLL
         {
         }
 
+        public Group(Storage storage) : base ()
+        {
+            _group = storage;
+        }
+
         public override bool CheckBorder(int width, int height)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            {
+                if (_group.GetItem(i).CheckBorder(width, height)==false)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public override bool CheckPoint(int _x, int _y)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            {
+                if (_group.GetItem(i).CheckPoint(_x, _y))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public override void Display()
@@ -332,7 +357,10 @@ namespace StorageForPainDLL
 
         public override void Draw(Graphics graph)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            {
+                _group.GetItem(i).Draw(graph);
+            }
         }
     }
 

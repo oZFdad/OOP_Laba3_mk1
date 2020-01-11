@@ -119,6 +119,7 @@
             this.btCreatGroup.TabIndex = 7;
             this.btCreatGroup.Text = "Сгруппировать";
             this.btCreatGroup.UseVisualStyleBackColor = true;
+            this.btCreatGroup.Click += new System.EventHandler(this.btCreatGroup_Click);
             // 
             // btUnGroup
             // 
@@ -128,6 +129,7 @@
             this.btUnGroup.TabIndex = 8;
             this.btUnGroup.Text = "Разгруппировать";
             this.btUnGroup.UseVisualStyleBackColor = true;
+            this.btUnGroup.Click += new System.EventHandler(this.btUnGroup_Click);
             // 
             // Form1
             // 
