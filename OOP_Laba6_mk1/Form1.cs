@@ -99,7 +99,7 @@ namespace OOP_Laba6_mk1
                 }
                 else
                 {
-                    MessageBox.Show("Выберите тип фигуры", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                    MessageBox.Show("Выберите тип фигуры", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             creatShapeOnPicture = true;
@@ -281,9 +281,9 @@ namespace OOP_Laba6_mk1
             for(int i = 1; i <= bufStorageGroup.GetMaxIdex(); i++)
             {
                 Group bufGroup = (Group)bufStorageGroup.GetItem(i);
-                for(int j = 1; j <= bufGroup._group.GetMaxIdex(); j++)
+                for(int j = 1; j <= bufGroup.GroupStorage.GetMaxIdex(); j++)
                 {
-                    _storage.AddItem(bufGroup._group.GetItem(j));
+                    _storage.AddItem(bufGroup.GroupStorage.GetItem(j));
                 }
             }
         }

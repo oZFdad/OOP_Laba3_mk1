@@ -49,7 +49,8 @@
             // painBox
             // 
             this.painBox.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) |
+                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                                                         System.Windows.Forms.AnchorStyles.Bottom) |
                                                         System.Windows.Forms.AnchorStyles.Left) |
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.painBox.BackColor = System.Drawing.SystemColors.ButtonShadow;
@@ -119,6 +120,7 @@
             // btCreatGroup
             // 
             this.btCreatGroup.Location = new System.Drawing.Point(14, 258);
+            this.btCreatGroup.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btCreatGroup.Name = "btCreatGroup";
             this.btCreatGroup.Size = new System.Drawing.Size(180, 27);
             this.btCreatGroup.TabIndex = 7;
@@ -129,6 +131,7 @@
             // btUnGroup
             // 
             this.btUnGroup.Location = new System.Drawing.Point(14, 292);
+            this.btUnGroup.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btUnGroup.Name = "btUnGroup";
             this.btUnGroup.Size = new System.Drawing.Size(180, 27);
             this.btUnGroup.TabIndex = 8;
@@ -139,6 +142,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(16, 70);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 27);
             this.button1.TabIndex = 9;
@@ -148,6 +152,8 @@
             // 
             // treeViewShape
             // 
+            this.treeViewShape.CheckBoxes = true;
+            this.treeViewShape.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.treeViewShape.Location = new System.Drawing.Point(6, 338);
             this.treeViewShape.Name = "treeViewShape";
             this.treeViewShape.Size = new System.Drawing.Size(206, 426);
