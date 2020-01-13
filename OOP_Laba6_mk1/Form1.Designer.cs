@@ -28,6 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Узел0");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Узел2");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Узел3");
+            System.Windows.Forms.TreeNode treeNode4 =
+                new System.Windows.Forms.TreeNode("Узел1", new System.Windows.Forms.TreeNode[] {treeNode2, treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Узел7");
+            System.Windows.Forms.TreeNode treeNode6 =
+                new System.Windows.Forms.TreeNode("Узел6", new System.Windows.Forms.TreeNode[] {treeNode5});
+            System.Windows.Forms.TreeNode treeNode7 =
+                new System.Windows.Forms.TreeNode("Узел5", new System.Windows.Forms.TreeNode[] {treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 =
+                new System.Windows.Forms.TreeNode("Узел4", new System.Windows.Forms.TreeNode[] {treeNode7});
             this.painBox = new System.Windows.Forms.PictureBox();
             this.cbShapeChange = new System.Windows.Forms.ComboBox();
             this.cbColorChange = new System.Windows.Forms.ComboBox();
@@ -111,7 +123,7 @@
             this.btRDown.Location = new System.Drawing.Point(106, 177);
             this.btRDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btRDown.Name = "btRDown";
-            this.btRDown.Size = new System.Drawing.Size(87, 22);
+            this.btRDown.Size = new System.Drawing.Size(88, 22);
             this.btRDown.TabIndex = 6;
             this.btRDown.Text = "Уменьшить";
             this.btRDown.UseVisualStyleBackColor = true;
@@ -153,11 +165,30 @@
             // treeViewShape
             // 
             this.treeViewShape.CheckBoxes = true;
-            this.treeViewShape.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.treeViewShape.Location = new System.Drawing.Point(6, 338);
+            this.treeViewShape.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.treeViewShape.Name = "treeViewShape";
+            treeNode1.Name = "Узел0";
+            treeNode1.Text = "Узел0";
+            treeNode2.Name = "Узел2";
+            treeNode2.Text = "Узел2";
+            treeNode3.Name = "Узел3";
+            treeNode3.Text = "Узел3";
+            treeNode4.Name = "Узел1";
+            treeNode4.Text = "Узел1";
+            treeNode5.Name = "Узел7";
+            treeNode5.Text = "Узел7";
+            treeNode6.Name = "Узел6";
+            treeNode6.Text = "Узел6";
+            treeNode7.Name = "Узел5";
+            treeNode7.Text = "Узел5";
+            treeNode8.Name = "Узел4";
+            treeNode8.Text = "Узел4";
+            this.treeViewShape.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {treeNode1, treeNode4, treeNode8});
             this.treeViewShape.Size = new System.Drawing.Size(206, 426);
             this.treeViewShape.TabIndex = 10;
+            this.treeViewShape.AfterCheck +=
+                new System.Windows.Forms.TreeViewEventHandler(this.treeViewShape_AfterCheck);
             // 
             // menuStrip1
             // 
@@ -179,14 +210,14 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "L&oad";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 

@@ -313,5 +313,10 @@ namespace OOP_Laba6_mk1
                 _storage.SaveToFile(dialog.FileName);
             }
         }
+
+        private void treeViewShape_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            MessageBox.Show("МЫ ВСЕ УМРЕМ!!!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

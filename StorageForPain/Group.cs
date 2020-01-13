@@ -74,10 +74,5 @@ namespace StorageForPainDLL
                 GroupStorage.GetItem(i).ChangeR(dr);
             }
         }
-    
-        public void EditColor(Color newColor)
-        {
-            color = newColor;
-        }
     }
 }
