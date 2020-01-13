@@ -306,8 +306,8 @@ namespace OOP_Laba6_mk1
             if (result == DialogResult.OK)
             {
                 _storage.LoadFromFile(dialog.FileName);
+                painBox.Refresh();
             }
-            painBox.Refresh();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

@@ -108,7 +108,7 @@ namespace StorageForPainDLL
         public void Save(StreamWriter writer, int spacing)
         {
             writer.Write(new string(' ', spacing));
-            writer.WriteLine($"Count {lenght}");
+            writer.WriteLine($"Count {lenght}"); // "Count " + length
             for (var i = 0; i < lenght; i++)
             {
                 _box[i].Save(writer, spacing);
@@ -117,10 +117,9 @@ namespace StorageForPainDLL
 
         public void SaveToFile(string fileName)
         {
-            using (var writer = new StreamWriter(fileName, false))
-            {
-                Save(writer, 0);
-            }
+            var writer = new StreamWriter(fileName, false);
+            Save(writer, 0);
+            writer.Dispose();
         }
 
         public void Load(StreamReader reader)
@@ -128,12 +127,8 @@ namespace StorageForPainDLL
             var count = reader.ReadLine();
             if (count == null) throw new FormatException("Пустая строка");
 
-            var parts = count.Trim().Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length != 2 || parts[0] != "Count" || !int.TryParse(parts[1], out var intCount))
-            {
-                throw new FormatException(
-                    $"Ошибка загрузки. При загрузке хранилища ожидалася строка в формате \"Count {{count}}\", а была получена {count}");
-            }
+            var parts = count.Split(new[]{' '}, StringSplitOptions.RemoveEmptyEntries);
+            var intCount = int.Parse(parts[1]);
 
             DeleteAll();
 
@@ -142,7 +137,7 @@ namespace StorageForPainDLL
                 var shapeLine = reader.ReadLine();
                 if (shapeLine == null) throw new FormatException("Пустая строка");
 
-                var shapeParts = shapeLine.Trim().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+                var shapeParts = shapeLine.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
                 var shape = ShapeFactory.Create(shapeParts[0]);
 
                 shape.Load(shapeLine, reader);
@@ -153,10 +148,9 @@ namespace StorageForPainDLL
 
         public void LoadFromFile(string fileName)
         {
-            using (var reader = new StreamReader(fileName))
-            {
-                Load(reader);
-            }
+            var reader = new StreamReader(fileName);
+            Load(reader);
+            reader.Dispose();
         }
     }
 }
