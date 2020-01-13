@@ -105,16 +105,52 @@ namespace StorageForPainDLL
             return _box[lenght-1];
         }
 
+        public void Save(StreamWriter writer, int spacing)
+        {
+            writer.Write(new string(' ', spacing));
+            writer.WriteLine($"Count {lenght}"); // "Count " + length
+            for (var i = 0; i < lenght; i++)
+            {
+                _box[i].Save(writer, spacing);
+            }
+        }
+
         public void SaveToFile(string fileName)
         {
-            using (var writer = new StreamWriter(fileName, false))
+            var writer = new StreamWriter(fileName, false);
+            Save(writer, 0);
+            writer.Dispose();
+        }
+
+        public void Load(StreamReader reader)
+        {
+            var count = reader.ReadLine();
+            if (count == null) throw new FormatException("Пустая строка");
+
+            var parts = count.Split(new[]{' '}, StringSplitOptions.RemoveEmptyEntries);
+            var intCount = int.Parse(parts[1]);
+
+            DeleteAll();
+
+            for (var i = 0; i < intCount; i++)
             {
-                writer.WriteLine(lenght);
-                for (var i = 0; i < lenght; i++)
-                {
-                    _box[i].Save(writer);
-                }
+                var shapeLine = reader.ReadLine();
+                if (shapeLine == null) throw new FormatException("Пустая строка");
+
+                var shapeParts = shapeLine.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+                var shape = ShapeFactory.Create(shapeParts[0]);
+
+                shape.Load(shapeLine, reader);
+
+                AddItem(shape);
             }
+        }
+
+        public void LoadFromFile(string fileName)
+        {
+            var reader = new StreamReader(fileName);
+            Load(reader);
+            reader.Dispose();
         }
     }
 }

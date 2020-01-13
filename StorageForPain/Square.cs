@@ -13,6 +13,8 @@ namespace StorageForPainDLL
         {
         }
 
+        public override string Name => "Square";
+
         public override void Display()
         {
             Console.WriteLine("Это квадрат с координатами центра описаной окружности Х={0} Y={1} и радиусом R={2}", x, y, r);
