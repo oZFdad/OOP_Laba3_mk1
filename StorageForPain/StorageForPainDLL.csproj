@@ -42,6 +42,7 @@
     <Compile Include="Circle.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Shape.cs" />
+    <Compile Include="ShapeFactory.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="StorageForPainMK1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

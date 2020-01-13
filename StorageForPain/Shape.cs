@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.IO;
 
@@ -8,6 +9,17 @@ namespace StorageForPainDLL
         public int x, y, r;
         public bool flag = false;
         public Color color = Color.Red;
+
+        //Example
+        protected Color _color = Color.Red;
+        public virtual Color ColorProperty
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
+        //Example
+
+        public abstract string Name { get; }
 
         public Shape(Vbr value)
         {
@@ -47,9 +59,20 @@ namespace StorageForPainDLL
         public abstract void Draw(Graphics graph);
         public abstract bool CheckBorder(int width, int height);
 
-        public virtual void Save(StreamWriter writer)
+        public virtual void Save(StreamWriter writer, int spacing)
         {
-            
+            writer.Write(new string(' ', spacing));
+            writer.WriteLine($"{Name} {x} {y} {r} {color.Name} {flag}");
+        }
+
+        public virtual void Load(string shapeLine, StreamReader reader)
+        {
+            var parts = shapeLine.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            x = int.Parse(parts[1]);
+            y = int.Parse(parts[2]);
+            r = int.Parse(parts[3]);
+            color = Color.FromName(parts[4]);
+            flag = bool.Parse(parts[5]);
         }
     }
 }

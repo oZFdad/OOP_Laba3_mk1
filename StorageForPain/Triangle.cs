@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.IO;
 
 namespace StorageForPainDLL
 {
@@ -21,6 +22,8 @@ namespace StorageForPainDLL
             _points[3].X = _points[0].X;
             _points[3].Y = _points[0].Y;
         }
+
+        public override string Name => "Triangle";
 
         public override void Display()
         {
@@ -108,6 +111,12 @@ namespace StorageForPainDLL
                 return false;
             }
             return true;
+        }
+
+        public override void Load(string shapeLine, StreamReader reader)
+        {
+            base.Load(shapeLine, reader);
+            CountPoints();
         }
     }
 }

@@ -105,15 +105,57 @@ namespace StorageForPainDLL
             return _box[lenght-1];
         }
 
+        public void Save(StreamWriter writer, int spacing)
+        {
+            writer.Write(new string(' ', spacing));
+            writer.WriteLine($"Count {lenght}");
+            for (var i = 0; i < lenght; i++)
+            {
+                _box[i].Save(writer, spacing);
+            }
+        }
+
         public void SaveToFile(string fileName)
         {
             using (var writer = new StreamWriter(fileName, false))
             {
-                writer.WriteLine(lenght);
-                for (var i = 0; i < lenght; i++)
-                {
-                    _box[i].Save(writer);
-                }
+                Save(writer, 0);
+            }
+        }
+
+        public void Load(StreamReader reader)
+        {
+            var count = reader.ReadLine();
+            if (count == null) throw new FormatException("Пустая строка");
+
+            var parts = count.Trim().Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 2 || parts[0] != "Count" || !int.TryParse(parts[1], out var intCount))
+            {
+                throw new FormatException(
+                    $"Ошибка загрузки. При загрузке хранилища ожидалася строка в формате \"Count {{count}}\", а была получена {count}");
+            }
+
+            DeleteAll();
+
+            for (var i = 0; i < intCount; i++)
+            {
+                var shapeLine = reader.ReadLine();
+                if (shapeLine == null) throw new FormatException("Пустая строка");
+
+                var shapeParts = shapeLine.Trim().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+                var shape = ShapeFactory.Create(shapeParts[0]);
+
+                shape.Load(shapeLine, reader);
+
+                AddItem(shape);
+            }
+        }
+
+        public void LoadFromFile(string fileName)
+        {
+            using (var reader = new StreamReader(fileName))
+            {
+                Load(reader);
             }
         }
     }

@@ -1,11 +1,27 @@
 using System;
 using System.Drawing;
+using System.IO;
 
 namespace StorageForPainDLL
 {
     public class Group : Shape
     {
         public Storage GroupStorage = new Storage(10);
+
+        //Example
+        public override Color ColorProperty
+        {
+            get => _color;
+            set
+            {
+                _color = value;
+                for (int i = 1; i <= GroupStorage.GetMaxIdex(); i++)
+                {
+                    GroupStorage.GetItem(i).ColorProperty = value;
+                }
+            }
+        }
+        //Example
 
         public Group(Vbr value) : base(value)
         {
@@ -45,6 +61,8 @@ namespace StorageForPainDLL
             return false;
         }
 
+        public override string Name => "Group";
+
         public override void Display()
         {
             throw new NotImplementedException();
@@ -74,7 +92,22 @@ namespace StorageForPainDLL
                 GroupStorage.GetItem(i).ChangeR(dr);
             }
         }
-    
+
+        public override void Save(StreamWriter writer, int spacing)
+        {
+            writer.Write(new string(' ', spacing));
+            writer.WriteLine($"{Name} {color.Name} {flag}");
+            GroupStorage.Save(writer, spacing + 2);
+        }
+
+        public override void Load(string shapeLine, StreamReader reader)
+        {
+            var parts = shapeLine.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            color = Color.FromName(parts[1]);
+            flag = bool.Parse(parts[2]);
+            GroupStorage.Load(reader);
+        }
+
         public void EditColor(Color newColor)
         {
             color = newColor;

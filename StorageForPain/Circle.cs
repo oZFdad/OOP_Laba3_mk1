@@ -13,6 +13,8 @@ namespace StorageForPainDLL
         {
         }
 
+        public override string Name => "Circle";
+
         public override void Display()
         {
             Console.WriteLine("Это окружность с центром Х={0} Y={1} и радиусом R={2}", x, y, r);

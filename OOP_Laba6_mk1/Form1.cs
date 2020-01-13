@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -295,7 +296,18 @@ namespace OOP_Laba6_mk1
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Shape|*.shape",
+                DefaultExt = "shape",
+                Multiselect = false
+            };
+            var result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                _storage.LoadFromFile(dialog.FileName);
+            }
+            painBox.Refresh();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
