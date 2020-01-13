@@ -65,11 +65,6 @@ namespace StorageForPainDLL
         }
         public abstract bool CheckPoint(int _x, int _y);
         public abstract void Draw(Graphics graph);
-        public void EditColor(Color newColor)
-        {
-            color = newColor;
-        }
-        
         public abstract bool CheckBorder(int width, int height);
     }
 
@@ -311,7 +306,7 @@ namespace StorageForPainDLL
 
     public class Group : Shape
     {
-        private Storage _group = new Storage(10);
+        public Storage _group = new Storage(10);
 
         public Group(Vbr value) : base(value)
         {
@@ -329,7 +324,7 @@ namespace StorageForPainDLL
 
         public override bool CheckBorder(int width, int height)
         {
-            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            for (int i = 1; i <= _group.GetMaxIdex(); i++)
             {
                 if (_group.GetItem(i).CheckBorder(width, height)==false)
                 {
@@ -341,7 +336,7 @@ namespace StorageForPainDLL
 
         public override bool CheckPoint(int _x, int _y)
         {
-            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            for (int i = 1; i <= _group.GetMaxIdex(); i++)
             {
                 if (_group.GetItem(i).CheckPoint(_x, _y))
                 {
@@ -358,22 +353,24 @@ namespace StorageForPainDLL
 
         public override void Draw(Graphics graph)
         {
-            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            for (int i = 1; i <= _group.GetMaxIdex(); i++)
             {
+                _group.GetItem(i).color = color;
+                _group.GetItem(i).flag = flag;
                 _group.GetItem(i).Draw(graph);
             }
         }
 
         public override void Move(int dx, int dy)
         {
-            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            for (int i = 1; i <= _group.GetMaxIdex(); i++)
             {
                 _group.GetItem(i).Move(dx, dy);
             }
         }
         public override void ChangeR(int dr)
         {
-            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            for (int i = 1; i <= _group.GetMaxIdex(); i++)
             {
                 _group.GetItem(i).ChangeR(dr);
             }

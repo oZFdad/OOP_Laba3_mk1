@@ -36,6 +36,8 @@
             this.btRDown = new System.Windows.Forms.Button();
             this.btCreatGroup = new System.Windows.Forms.Button();
             this.btUnGroup = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.treeViewShape = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.painBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +50,7 @@
             this.painBox.Location = new System.Drawing.Point(203, 22);
             this.painBox.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.painBox.Name = "painBox";
-            this.painBox.Size = new System.Drawing.Size(583, 489);
+            this.painBox.Size = new System.Drawing.Size(847, 624);
             this.painBox.TabIndex = 0;
             this.painBox.TabStop = false;
             this.painBox.Paint += new System.Windows.Forms.PaintEventHandler(this.painBox_Paint);
@@ -131,11 +133,30 @@
             this.btUnGroup.UseVisualStyleBackColor = true;
             this.btUnGroup.Click += new System.EventHandler(this.btUnGroup_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 44);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(137, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "точка остановки";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // treeViewShape
+            // 
+            this.treeViewShape.Location = new System.Drawing.Point(3, 276);
+            this.treeViewShape.Name = "treeViewShape";
+            this.treeViewShape.Size = new System.Drawing.Size(177, 370);
+            this.treeViewShape.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 532);
+            this.ClientSize = new System.Drawing.Size(1077, 667);
+            this.Controls.Add(this.treeViewShape);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btUnGroup);
             this.Controls.Add(this.btCreatGroup);
             this.Controls.Add(this.btRDown);
@@ -165,6 +186,8 @@
         private System.Windows.Forms.Button btRDown;
         private System.Windows.Forms.Button btCreatGroup;
         private System.Windows.Forms.Button btUnGroup;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TreeView treeViewShape;
     }
 }
 

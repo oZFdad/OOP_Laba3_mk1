@@ -16,7 +16,6 @@ namespace OOP_Laba6_mk1
     {
         private Storage _storage = new Storage(10);
         private bool creatShapeOnPicture = true;
-        public Pen pen = new Pen(Color.Red);
         private Color[] _colors;
 
         public Form1()
@@ -243,8 +242,53 @@ namespace OOP_Laba6_mk1
                 _storage.AddItem(new Group(bufStorage));
             }
         }
+/*
+        private void btUnGroup_Click(object sender, EventArgs e) // разгруппироввать все и вся
+        {
+            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            {
+                if (_storage.GetItem(i).GetType() == typeof(Group))
+                {
+                    if (_storage.GetItem(i).flag)
+                    {
+                        Group bufGroup = (Group)_storage.GetItem(i);
+                        _storage.DeleteItem(i);
+                        i--;
+                        for (int j = 1; j <= bufGroup._group.GetMaxIdex(); j++)
+                        {
+                            _storage.AddItem(bufGroup._group.GetItem(j));
+                        }
+                    }       
+                }
+            }
+        }
+*/
+        private void btUnGroup_Click(object sender, EventArgs e) //удаление только выделеных групп
+        {
+            Storage bufStorageGroup = new Storage();
+            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            {
+                if (_storage.GetItem(i).GetType() == typeof(Group))
+                {
+                    if (_storage.GetItem(i).flag)
+                    {
+                        bufStorageGroup.AddItem(_storage.GetItem(i));
+                        _storage.DeleteItem(i);
+                        i--;
+                    }
+                }
+            }
+            for(int i = 1; i <= bufStorageGroup.GetMaxIdex(); i++)
+            {
+                Group bufGroup = (Group)bufStorageGroup.GetItem(i);
+                for(int j = 1; j <= bufGroup._group.GetMaxIdex(); j++)
+                {
+                    _storage.AddItem(bufGroup._group.GetItem(j));
+                }
+            }
+        }
 
-        private void btUnGroup_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             int a = 0;
         }
