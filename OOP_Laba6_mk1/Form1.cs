@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -330,6 +331,8 @@ namespace OOP_Laba6_mk1
 
         private void treeViewShape_AfterCheck(object sender, TreeViewEventArgs e)
         {
+            ((IFlagObserver)e.Node.Tag).Update(e.Node.Checked);
+            painBox.Refresh();
         }
     }
 }

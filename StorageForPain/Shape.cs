@@ -15,6 +15,8 @@ namespace StorageForPainDLL
             get { return _flag; }
             set
             {
+                if (_flag == value) return;
+                
                 _flag = value;
                 foreach (var observer in _flagObservers)
                 {

@@ -27,9 +27,9 @@ namespace OOP_Laba6_mk1
         {
             node.Text = shape.Name;
             node.Checked = shape.Flag;
-            node.Tag = shape;
             shape.AddFlagObserver(new TreeNodeFlagObserver(node));
-            
+            node.Tag = new ShapeFlagObserver(shape);
+
             if (shape.GetType() == typeof(Group))
             {
                 var group = (Group) shape;
