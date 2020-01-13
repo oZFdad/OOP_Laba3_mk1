@@ -23,8 +23,8 @@
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -38,19 +38,25 @@
             this.btUnGroup = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.treeViewShape = new System.Windows.Forms.TreeView();
-            ((System.ComponentModel.ISupportInitialize)(this.painBox)).BeginInit();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize) (this.painBox)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // painBox
             // 
-            this.painBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.painBox.Anchor =
+                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) |
+                                                        System.Windows.Forms.AnchorStyles.Left) |
+                                                       System.Windows.Forms.AnchorStyles.Right)));
             this.painBox.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.painBox.Location = new System.Drawing.Point(203, 22);
+            this.painBox.Location = new System.Drawing.Point(237, 29);
             this.painBox.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.painBox.Name = "painBox";
-            this.painBox.Size = new System.Drawing.Size(847, 624);
+            this.painBox.Size = new System.Drawing.Size(988, 736);
             this.painBox.TabIndex = 0;
             this.painBox.TabStop = false;
             this.painBox.Paint += new System.Windows.Forms.PaintEventHandler(this.painBox_Paint);
@@ -59,24 +65,21 @@
             // cbShapeChange
             // 
             this.cbShapeChange.FormattingEnabled = true;
-            this.cbShapeChange.Items.AddRange(new object[] {
-            "Circle",
-            "Square",
-            "Triangle"});
-            this.cbShapeChange.Location = new System.Drawing.Point(9, 8);
+            this.cbShapeChange.Items.AddRange(new object[] {"Circle", "Square", "Triangle"});
+            this.cbShapeChange.Location = new System.Drawing.Point(13, 29);
             this.cbShapeChange.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.cbShapeChange.Name = "cbShapeChange";
-            this.cbShapeChange.Size = new System.Drawing.Size(156, 21);
+            this.cbShapeChange.Size = new System.Drawing.Size(181, 23);
             this.cbShapeChange.TabIndex = 1;
             this.cbShapeChange.Text = "Выбрать фигуру";
             // 
             // cbColorChange
             // 
             this.cbColorChange.FormattingEnabled = true;
-            this.cbColorChange.Location = new System.Drawing.Point(10, 179);
+            this.cbColorChange.Location = new System.Drawing.Point(14, 226);
             this.cbColorChange.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cbColorChange.Name = "cbColorChange";
-            this.cbColorChange.Size = new System.Drawing.Size(155, 21);
+            this.cbColorChange.Size = new System.Drawing.Size(180, 23);
             this.cbColorChange.TabIndex = 3;
             this.cbColorChange.Text = "Выбери цвет";
             this.cbColorChange.SelectedIndexChanged += new System.EventHandler(this.cbColorChange_SelectedIndexChanged);
@@ -84,19 +87,19 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 86);
+            this.label1.Location = new System.Drawing.Point(2, 119);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 13);
+            this.label1.Size = new System.Drawing.Size(192, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "Работа с выделеными объектами";
             // 
             // btRUp
             // 
-            this.btRUp.Location = new System.Drawing.Point(10, 136);
+            this.btRUp.Location = new System.Drawing.Point(14, 177);
             this.btRUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btRUp.Name = "btRUp";
-            this.btRUp.Size = new System.Drawing.Size(65, 19);
+            this.btRUp.Size = new System.Drawing.Size(76, 22);
             this.btRUp.TabIndex = 5;
             this.btRUp.Text = "Увеличить";
             this.btRUp.UseVisualStyleBackColor = true;
@@ -104,10 +107,10 @@
             // 
             // btRDown
             // 
-            this.btRDown.Location = new System.Drawing.Point(89, 136);
+            this.btRDown.Location = new System.Drawing.Point(106, 177);
             this.btRDown.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btRDown.Name = "btRDown";
-            this.btRDown.Size = new System.Drawing.Size(75, 19);
+            this.btRDown.Size = new System.Drawing.Size(87, 22);
             this.btRDown.TabIndex = 6;
             this.btRDown.Text = "Уменьшить";
             this.btRDown.UseVisualStyleBackColor = true;
@@ -115,9 +118,9 @@
             // 
             // btCreatGroup
             // 
-            this.btCreatGroup.Location = new System.Drawing.Point(10, 207);
+            this.btCreatGroup.Location = new System.Drawing.Point(14, 258);
             this.btCreatGroup.Name = "btCreatGroup";
-            this.btCreatGroup.Size = new System.Drawing.Size(154, 23);
+            this.btCreatGroup.Size = new System.Drawing.Size(180, 27);
             this.btCreatGroup.TabIndex = 7;
             this.btCreatGroup.Text = "Сгруппировать";
             this.btCreatGroup.UseVisualStyleBackColor = true;
@@ -125,9 +128,9 @@
             // 
             // btUnGroup
             // 
-            this.btUnGroup.Location = new System.Drawing.Point(10, 236);
+            this.btUnGroup.Location = new System.Drawing.Point(14, 292);
             this.btUnGroup.Name = "btUnGroup";
-            this.btUnGroup.Size = new System.Drawing.Size(154, 23);
+            this.btUnGroup.Size = new System.Drawing.Size(180, 27);
             this.btUnGroup.TabIndex = 8;
             this.btUnGroup.Text = "Разгруппировать";
             this.btUnGroup.UseVisualStyleBackColor = true;
@@ -135,9 +138,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 44);
+            this.button1.Location = new System.Drawing.Point(16, 70);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 23);
+            this.button1.Size = new System.Drawing.Size(160, 27);
             this.button1.TabIndex = 9;
             this.button1.Text = "точка остановки";
             this.button1.UseVisualStyleBackColor = true;
@@ -145,16 +148,47 @@
             // 
             // treeViewShape
             // 
-            this.treeViewShape.Location = new System.Drawing.Point(3, 276);
+            this.treeViewShape.Location = new System.Drawing.Point(6, 338);
             this.treeViewShape.Name = "treeViewShape";
-            this.treeViewShape.Size = new System.Drawing.Size(177, 370);
+            this.treeViewShape.Size = new System.Drawing.Size(206, 426);
             this.treeViewShape.TabIndex = 10;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1256, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
+                {this.loadToolStripMenuItem, this.saveToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Text = "L&oad";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1077, 667);
+            this.ClientSize = new System.Drawing.Size(1256, 789);
             this.Controls.Add(this.treeViewShape);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btUnGroup);
@@ -165,15 +199,18 @@
             this.Controls.Add(this.cbColorChange);
             this.Controls.Add(this.cbShapeChange);
             this.Controls.Add(this.painBox);
+            this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.painBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.painBox)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -188,6 +225,10 @@
         private System.Windows.Forms.Button btUnGroup;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TreeView treeViewShape;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     }
 }
 

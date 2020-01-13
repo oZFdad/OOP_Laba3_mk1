@@ -292,5 +292,26 @@ namespace OOP_Laba6_mk1
         {
             int a = 0;
         }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog
+            {
+                Filter = "Shape|*.shape",
+                AddExtension = true,
+                DefaultExt = "shape",
+                OverwritePrompt = true
+            };
+            var result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                _storage.SaveToFile(dialog.FileName);
+            }
+        }
     }
 }
