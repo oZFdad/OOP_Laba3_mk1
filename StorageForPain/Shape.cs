@@ -7,7 +7,23 @@ namespace StorageForPainDLL
     public abstract class Shape
     {
         public int x, y, r;
-        public bool flag = false;
+
+        private bool _flag;
+        public bool Flag
+        {
+            get { return _flag; }
+            set
+            {
+                _flag = value;
+                if (OnSelectionChanged != null)
+                {
+                    OnSelectionChanged(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        public event EventHandler OnSelectionChanged;
+        
         public Color color = Color.Red;
 
         //Example
@@ -62,7 +78,7 @@ namespace StorageForPainDLL
         public virtual void Save(StreamWriter writer, int spacing)
         {
             writer.Write(new string(' ', spacing));
-            writer.WriteLine($"{Name} {x} {y} {r} {color.Name} {flag}");
+            writer.WriteLine($"{Name} {x} {y} {r} {color.Name} {Flag}");
         }
 
         public virtual void Load(string shapeLine, StreamReader reader)
@@ -72,7 +88,12 @@ namespace StorageForPainDLL
             y = int.Parse(parts[2]);
             r = int.Parse(parts[3]);
             color = Color.FromName(parts[4]);
-            flag = bool.Parse(parts[5]);
+            Flag = bool.Parse(parts[5]);
+        }
+
+        public void AddFlagObserver(IFlagObserver flagObserver)
+        {
+            
         }
     }
 }

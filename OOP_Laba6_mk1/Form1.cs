@@ -27,13 +27,46 @@ namespace OOP_Laba6_mk1
                 .Select(p => (Color)p.GetValue(null)).ToArray();
 
             cbColorChange.Items.AddRange(_colors.Select(c => c.Name).ToArray());
+            
+            _storage.OnChange += StorageOnChange;
+        }
+
+        private void StorageOnChange(object sender, EventArgs e)
+        {
+            treeViewShape.Nodes.Clear();
+            for (var i = 1; i <= _storage.GetMaxIndex(); i++)
+            {
+                var node = new TreeNode();
+                ProcessNode(node, _storage.GetItem(i));
+                treeViewShape.Nodes.Add(node);
+            }
+        }
+
+        private void ProcessNode(TreeNode node, Shape shape)
+        {
+            node.Text = shape.Name;
+            node.Checked = shape.Flag;
+            node.Tag = shape;
+            shape.OnSelectionChanged += (sender, args) => { node.Checked = shape.Flag; };
+            
+            if (shape.GetType() == typeof(Group))
+            {
+                var group = (Group) shape;
+                var storage = group.GroupStorage;
+                for (var i = 1; i <= storage.GetMaxIndex(); i++)
+                {
+                    var childNode = new TreeNode("Group");
+                    ProcessNode(childNode, storage.GetItem(i));
+                    node.Nodes.Add(childNode);
+                }
+            }
         }
 
         private void DeleteMarkedItems()
         {
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (_storage.GetItem(i).flag)
+                if (_storage.GetItem(i).Flag)
                 {
                     _storage.DeleteItem(i);
                     i--;
@@ -55,18 +88,18 @@ namespace OOP_Laba6_mk1
 
         private void painBox_MouseDown(object sender, MouseEventArgs e)
         {
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
                 var shape = _storage.GetItem(i);
                 if (shape.CheckPoint(e.X, e.Y))
                 {
-                    if (shape.flag)
+                    if (shape.Flag)
                     {
-                        shape.flag = false;
+                        shape.Flag = false;
                     }
                     else
                     {
-                        shape.flag = true;
+                        shape.Flag = true;
                     }
                     creatShapeOnPicture = false;
                 }
@@ -109,9 +142,9 @@ namespace OOP_Laba6_mk1
 
         private void btRUp_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
+                if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                 {
                     _storage.GetItem(i).ChangeR(1);
                     if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
@@ -126,9 +159,9 @@ namespace OOP_Laba6_mk1
 
         private void btRDown_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (_storage.GetItem(i).flag)
+                if (_storage.GetItem(i).Flag)
                 {
                     _storage.GetItem(i).ChangeR(-1);
                 }
@@ -138,11 +171,11 @@ namespace OOP_Laba6_mk1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
                 if (e.KeyCode == Keys.Left)
                 {
-                    if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
+                    if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                     {
                         _storage.GetItem(i).Move(-1, 0);
                         if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
@@ -154,7 +187,7 @@ namespace OOP_Laba6_mk1
                 }
                 if (e.KeyCode == Keys.Right)
                 {
-                    if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
+                    if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                     {
                         _storage.GetItem(i).Move(1, 0);
                         if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
@@ -166,7 +199,7 @@ namespace OOP_Laba6_mk1
                 }
                 if (e.KeyCode == Keys.Up)
                 {
-                    if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
+                    if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                     {
                         _storage.GetItem(i).Move(0, -1);
                         if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
@@ -178,7 +211,7 @@ namespace OOP_Laba6_mk1
                 }
                 if (e.KeyCode == Keys.Down)
                 {
-                    if (_storage.GetItem(i).flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
+                    if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
                     {
                         _storage.GetItem(i).Move(0, 1);
                         if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
@@ -190,7 +223,7 @@ namespace OOP_Laba6_mk1
                 }
                 if (e.KeyCode == Keys.Delete)
                 {
-                    if (_storage.GetItem(i).flag)
+                    if (_storage.GetItem(i).Flag)
                     {
                         _storage.DeleteItem(i);
                         i--;
@@ -208,7 +241,7 @@ namespace OOP_Laba6_mk1
         private void painBox_Paint(object sender, PaintEventArgs e)
         {
             Graphics pain = e.Graphics;
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
                 _storage.GetItem(i).Draw(pain);
             }
@@ -216,9 +249,9 @@ namespace OOP_Laba6_mk1
 
         private void cbColorChange_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (_storage.GetItem(i).flag)
+                if (_storage.GetItem(i).Flag)
                 {
                     _storage.GetItem(i).color = GetCurrentSelectedColor();
                 }
@@ -229,16 +262,16 @@ namespace OOP_Laba6_mk1
         private void btCreatGroup_Click(object sender, EventArgs e)
         {
             Storage bufStorage = new Storage();
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (_storage.GetItem(i).flag)
+                if (_storage.GetItem(i).Flag)
                 {
                     bufStorage.AddItem(_storage.GetItem(i));
                     _storage.DeleteItem(i);
                     i--;
                 }
             }
-            if (bufStorage.GetMaxIdex() != 0)
+            if (bufStorage.GetMaxIndex() != 0)
             {
                 _storage.AddItem(new Group(bufStorage));
             }
@@ -267,11 +300,11 @@ namespace OOP_Laba6_mk1
         private void btUnGroup_Click(object sender, EventArgs e) //удаление только выделеных групп
         {
             Storage bufStorageGroup = new Storage();
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
                 if (_storage.GetItem(i).GetType() == typeof(Group))
                 {
-                    if (_storage.GetItem(i).flag)
+                    if (_storage.GetItem(i).Flag)
                     {
                         bufStorageGroup.AddItem(_storage.GetItem(i));
                         _storage.DeleteItem(i);
@@ -279,10 +312,10 @@ namespace OOP_Laba6_mk1
                     }
                 }
             }
-            for(int i = 1; i <= bufStorageGroup.GetMaxIdex(); i++)
+            for(int i = 1; i <= bufStorageGroup.GetMaxIndex(); i++)
             {
                 Group bufGroup = (Group)bufStorageGroup.GetItem(i);
-                for(int j = 1; j <= bufGroup.GroupStorage.GetMaxIdex(); j++)
+                for(int j = 1; j <= bufGroup.GroupStorage.GetMaxIndex(); j++)
                 {
                     _storage.AddItem(bufGroup.GroupStorage.GetItem(j));
                 }
@@ -328,7 +361,6 @@ namespace OOP_Laba6_mk1
 
         private void treeViewShape_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            MessageBox.Show("МЫ ВСЕ УМРЕМ!!!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

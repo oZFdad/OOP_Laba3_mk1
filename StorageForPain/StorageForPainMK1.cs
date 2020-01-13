@@ -9,6 +9,8 @@ namespace StorageForPainDLL
         Shape[] _box;
         int _maxSize, lenght = 0;
 
+        public event EventHandler OnChange;
+
         public Storage()
         {
             _maxSize = 10;
@@ -49,6 +51,8 @@ namespace StorageForPainDLL
             }
             _box[lenght] = item;
             lenght++;
+
+            CallOnChange();
         }
 
         public void DeleteItem (int index)
@@ -63,6 +67,8 @@ namespace StorageForPainDLL
                     }
                     lenght--;
                     Array.Clear(_box, lenght, 1);
+                    
+                    CallOnChange();
                 }
             }
             else
@@ -77,6 +83,8 @@ namespace StorageForPainDLL
             {
                 lenght--;
                 Array.Clear(_box, lenght, 1);
+                
+                CallOnChange();
             }
             else
             {
@@ -88,9 +96,11 @@ namespace StorageForPainDLL
         {
             Array.Clear(_box, 0, lenght);
             lenght = 0;
+            
+            CallOnChange();
         }
 
-        public int GetMaxIdex()
+        public int GetMaxIndex()
         {
             return lenght;
         }
@@ -144,6 +154,8 @@ namespace StorageForPainDLL
 
                 AddItem(shape);
             }
+            
+            CallOnChange();
         }
 
         public void LoadFromFile(string fileName)
@@ -151,6 +163,14 @@ namespace StorageForPainDLL
             var reader = new StreamReader(fileName);
             Load(reader);
             reader.Dispose();
+        }
+        
+        private void CallOnChange()
+        {
+            if (OnChange != null)
+            {
+                OnChange(this, EventArgs.Empty); //OnChange?.Invoke(this, EventArgs.Empty)
+            }
         }
     }
 }

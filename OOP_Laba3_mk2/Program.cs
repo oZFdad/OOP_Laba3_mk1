@@ -76,15 +76,15 @@ namespace OOP_Laba3_mk2
                 }
                 else if (rand == 1)
                 {
-                    if (storage.GetMaxIdex() != 0)
+                    if (storage.GetMaxIndex() != 0)
                     {
-                        storage.DeleteItem(rnd.Next(1, storage.GetMaxIdex()));
+                        storage.DeleteItem(rnd.Next(1, storage.GetMaxIndex()));
                         Console.WriteLine("Успешно удален элемент по индексу");
                     }
                 }
                 else if (rand == 2)
                 {
-                    if (storage.GetMaxIdex() != 0)
+                    if (storage.GetMaxIndex() != 0)
                     {
                         storage.DeleteItem();
                         Console.WriteLine("Успешно удален последний элемент");
@@ -92,20 +92,20 @@ namespace OOP_Laba3_mk2
                 }
                 else if (rand == 3)
                 {
-                    Console.WriteLine("Элементов в хранилище - {0}", storage.GetMaxIdex());
+                    Console.WriteLine("Элементов в хранилище - {0}", storage.GetMaxIndex());
                 }
                 else if (rand == 4)
                 {
-                    if (storage.GetMaxIdex() != 0)
+                    if (storage.GetMaxIndex() != 0)
                     {
                         storage.GetItem().Display();
                     }
                 }
                 else
                 {
-                    if (storage.GetMaxIdex() != 0)
+                    if (storage.GetMaxIndex() != 0)
                     {
-                        storage.GetItem(rnd.Next(1, storage.GetMaxIdex())).Display();
+                        storage.GetItem(rnd.Next(1, storage.GetMaxIndex())).Display();
                     }
                 }
                 Thread.Sleep(20);

@@ -18,9 +18,9 @@ namespace OOP_Laba4_mk1
 
         private void DeleteMarkedItems()
         {
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (_storage.GetItem(i).flag)
+                if (_storage.GetItem(i).Flag)
                 {
                     _storage.DeleteItem(i);
                     i--;
@@ -31,18 +31,18 @@ namespace OOP_Laba4_mk1
 
         private void painBox_MouseDown(object sender, MouseEventArgs e)
         {
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
                 var shape = _storage.GetItem(i);
                 if (shape.CheckPoint(e.X, e.Y))
                 {
-                    if (shape.flag)
+                    if (shape.Flag)
                     {
-                        shape.flag = false;
+                        shape.Flag = false;
                     }
                     else
                     {
-                        shape.flag = true;
+                        shape.Flag = true;
                     }
                     creatCircleOnPicture = false;
                 }
@@ -78,11 +78,11 @@ namespace OOP_Laba4_mk1
         private void painBox_Paint(object sender, PaintEventArgs e)
         {
             Graphics pain = e.Graphics;
-            for (int i = 1; i <= _storage.GetMaxIdex(); i++)
+            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
                 _storage.GetItem(i).Draw(pain);
             }
-            labelNumber.Text = "Объектов в хранилище " + Convert.ToString(_storage.GetMaxIdex());
+            labelNumber.Text = "Объектов в хранилище " + Convert.ToString(_storage.GetMaxIndex());
         }
     }
 }

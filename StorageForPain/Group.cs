@@ -15,7 +15,7 @@ namespace StorageForPainDLL
             set
             {
                 _color = value;
-                for (int i = 1; i <= GroupStorage.GetMaxIdex(); i++)
+                for (int i = 1; i <= GroupStorage.GetMaxIndex(); i++)
                 {
                     GroupStorage.GetItem(i).ColorProperty = value;
                 }
@@ -34,12 +34,12 @@ namespace StorageForPainDLL
         public Group(Storage storage) : base ()
         {
             GroupStorage = storage;
-            flag = true;
+            Flag = true;
         }
 
         public override bool CheckBorder(int width, int height)
         {
-            for (int i = 1; i <= GroupStorage.GetMaxIdex(); i++)
+            for (int i = 1; i <= GroupStorage.GetMaxIndex(); i++)
             {
                 if (GroupStorage.GetItem(i).CheckBorder(width, height)==false)
                 {
@@ -51,7 +51,7 @@ namespace StorageForPainDLL
 
         public override bool CheckPoint(int _x, int _y)
         {
-            for (int i = 1; i <= GroupStorage.GetMaxIdex(); i++)
+            for (int i = 1; i <= GroupStorage.GetMaxIndex(); i++)
             {
                 if (GroupStorage.GetItem(i).CheckPoint(_x, _y))
                 {
@@ -70,24 +70,24 @@ namespace StorageForPainDLL
 
         public override void Draw(Graphics graph)
         {
-            for (int i = 1; i <= GroupStorage.GetMaxIdex(); i++)
+            for (int i = 1; i <= GroupStorage.GetMaxIndex(); i++)
             {
                 GroupStorage.GetItem(i).color = color;
-                GroupStorage.GetItem(i).flag = flag;
+                GroupStorage.GetItem(i).Flag = Flag;
                 GroupStorage.GetItem(i).Draw(graph);
             }
         }
 
         public override void Move(int dx, int dy)
         {
-            for (int i = 1; i <= GroupStorage.GetMaxIdex(); i++)
+            for (int i = 1; i <= GroupStorage.GetMaxIndex(); i++)
             {
                 GroupStorage.GetItem(i).Move(dx, dy);
             }
         }
         public override void ChangeR(int dr)
         {
-            for (int i = 1; i <= GroupStorage.GetMaxIdex(); i++)
+            for (int i = 1; i <= GroupStorage.GetMaxIndex(); i++)
             {
                 GroupStorage.GetItem(i).ChangeR(dr);
             }
@@ -96,7 +96,7 @@ namespace StorageForPainDLL
         public override void Save(StreamWriter writer, int spacing)
         {
             writer.Write(new string(' ', spacing));
-            writer.WriteLine($"{Name} {color.Name} {flag}");
+            writer.WriteLine($"{Name} {color.Name} {Flag}");
             GroupStorage.Save(writer, spacing + 2);
         }
 
@@ -104,7 +104,7 @@ namespace StorageForPainDLL
         {
             var parts = shapeLine.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             color = Color.FromName(parts[1]);
-            flag = bool.Parse(parts[2]);
+            Flag = bool.Parse(parts[2]);
             GroupStorage.Load(reader);
         }
     }

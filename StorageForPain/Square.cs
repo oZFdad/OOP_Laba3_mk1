@@ -35,7 +35,7 @@ namespace StorageForPainDLL
         public override void Draw(Graphics graph)
         {
             Pen pen;
-            if (flag)
+            if (Flag)
             {
                 pen = new Pen(color, 10);
             }
