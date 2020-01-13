@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
@@ -9,7 +10,7 @@ namespace StorageForPainDLL
         Shape[] _box;
         int _maxSize, lenght = 0;
 
-        public event EventHandler OnChange;
+        private readonly List<IStorageObserver> _storageObservers = new List<IStorageObserver>();
 
         public Storage()
         {
@@ -52,7 +53,7 @@ namespace StorageForPainDLL
             _box[lenght] = item;
             lenght++;
 
-            CallOnChange();
+            CallStorageObservers();
         }
 
         public void DeleteItem (int index)
@@ -68,7 +69,7 @@ namespace StorageForPainDLL
                     lenght--;
                     Array.Clear(_box, lenght, 1);
                     
-                    CallOnChange();
+                    CallStorageObservers();
                 }
             }
             else
@@ -84,7 +85,7 @@ namespace StorageForPainDLL
                 lenght--;
                 Array.Clear(_box, lenght, 1);
                 
-                CallOnChange();
+                CallStorageObservers();
             }
             else
             {
@@ -97,7 +98,7 @@ namespace StorageForPainDLL
             Array.Clear(_box, 0, lenght);
             lenght = 0;
             
-            CallOnChange();
+            CallStorageObservers();
         }
 
         public int GetMaxIndex()
@@ -155,7 +156,7 @@ namespace StorageForPainDLL
                 AddItem(shape);
             }
             
-            CallOnChange();
+            CallStorageObservers();
         }
 
         public void LoadFromFile(string fileName)
@@ -164,13 +165,18 @@ namespace StorageForPainDLL
             Load(reader);
             reader.Dispose();
         }
-        
-        private void CallOnChange()
+
+        public void CallStorageObservers()
         {
-            if (OnChange != null)
+            foreach (var observer in _storageObservers)
             {
-                OnChange(this, EventArgs.Empty); //OnChange?.Invoke(this, EventArgs.Empty)
+                observer.Update(this);
             }
+        }
+
+        public void AddStorageObserver(IStorageObserver observer)
+        {
+            _storageObservers.Add(observer);
         }
     }
 }

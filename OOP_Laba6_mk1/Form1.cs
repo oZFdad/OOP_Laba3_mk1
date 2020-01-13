@@ -28,38 +28,7 @@ namespace OOP_Laba6_mk1
 
             cbColorChange.Items.AddRange(_colors.Select(c => c.Name).ToArray());
             
-            _storage.OnChange += StorageOnChange;
-        }
-
-        private void StorageOnChange(object sender, EventArgs e)
-        {
-            treeViewShape.Nodes.Clear();
-            for (var i = 1; i <= _storage.GetMaxIndex(); i++)
-            {
-                var node = new TreeNode();
-                ProcessNode(node, _storage.GetItem(i));
-                treeViewShape.Nodes.Add(node);
-            }
-        }
-
-        private void ProcessNode(TreeNode node, Shape shape)
-        {
-            node.Text = shape.Name;
-            node.Checked = shape.Flag;
-            node.Tag = shape;
-            shape.OnSelectionChanged += (sender, args) => { node.Checked = shape.Flag; };
-            
-            if (shape.GetType() == typeof(Group))
-            {
-                var group = (Group) shape;
-                var storage = group.GroupStorage;
-                for (var i = 1; i <= storage.GetMaxIndex(); i++)
-                {
-                    var childNode = new TreeNode("Group");
-                    ProcessNode(childNode, storage.GetItem(i));
-                    node.Nodes.Add(childNode);
-                }
-            }
+            _storage.AddStorageObserver(new TreeViewStorageObserver(treeViewShape));
         }
 
         private void DeleteMarkedItems()

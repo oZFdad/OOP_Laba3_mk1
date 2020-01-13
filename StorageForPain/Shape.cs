@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 
@@ -15,14 +16,14 @@ namespace StorageForPainDLL
             set
             {
                 _flag = value;
-                if (OnSelectionChanged != null)
+                foreach (var observer in _flagObservers)
                 {
-                    OnSelectionChanged(this, EventArgs.Empty);
+                    observer.Update(_flag);
                 }
             }
         }
 
-        public event EventHandler OnSelectionChanged;
+        private List<IFlagObserver> _flagObservers = new List<IFlagObserver>();
         
         public Color color = Color.Red;
 
@@ -93,7 +94,7 @@ namespace StorageForPainDLL
 
         public void AddFlagObserver(IFlagObserver flagObserver)
         {
-            
+            _flagObservers.Add(flagObserver);
         }
     }
 }

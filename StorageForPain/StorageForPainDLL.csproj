@@ -42,6 +42,7 @@
     <Compile Include="Circle.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="IFlagObserver.cs" />
+    <Compile Include="IStorageObserver.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="ShapeFactory.cs" />
     <Compile Include="Square.cs" />
