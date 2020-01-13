@@ -324,6 +324,7 @@ namespace StorageForPainDLL
         public Group(Storage storage) : base ()
         {
             _group = storage;
+            flag = true;
         }
 
         public override bool CheckBorder(int width, int height)
@@ -361,6 +362,26 @@ namespace StorageForPainDLL
             {
                 _group.GetItem(i).Draw(graph);
             }
+        }
+
+        public override void Move(int dx, int dy)
+        {
+            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            {
+                _group.GetItem(i).Move(dx, dy);
+            }
+        }
+        public override void ChangeR(int dr)
+        {
+            for (int i = 1; i < _group.GetMaxIdex(); i++)
+            {
+                _group.GetItem(i).ChangeR(dr);
+            }
+        }
+    
+        public void EditColor(Color newColor)
+        {
+            color = newColor;
         }
     }
 
