@@ -6,7 +6,7 @@ using System.IO;
 
 namespace StorageForPainDLL
 {
-    public abstract class Shape : IMove
+    public abstract class Shape : IShapeChangeObserver
     {
         public int X;
         public int Y;
@@ -31,7 +31,7 @@ namespace StorageForPainDLL
         }
 
         private readonly List<IFlagObserver> _flagObservers = new List<IFlagObserver>();
-        private readonly List<IMoveObserver> _gummyShapeObservers = new List<IMoveObserver>();
+        private readonly List<IShapeChangeObserver> _shapeChangeObservers = new List<IShapeChangeObserver>();
         
         public Color color = Color.Red;
 
@@ -45,6 +45,8 @@ namespace StorageForPainDLL
         //Example
 
         public abstract string Name { get; }
+        
+        private bool _updating = false;
 
         public Shape(Vbr value)
         {
@@ -67,22 +69,44 @@ namespace StorageForPainDLL
 
         public abstract void Display();
 
-        public virtual void Move(int dx, int dy)
+        public virtual bool Move(int dx, int dy, int painBoxWidth, int painBoxHeight)
         {
+            if (_updating) return true;
+            _updating = true;
+            
             X += dx;
             Y += dy;
-            CallGummyObservers(X,Y,0);
+
+            if (!CheckBorder(painBoxWidth, painBoxHeight) || !CallChangeObservers(dx, dy, painBoxWidth, painBoxHeight))
+            {
+                X -= dx;
+                Y -= dy;
+                _updating = false;
+                return false;
+            }
+
+            _updating = false;
+            return true;
         }
-        public virtual void ChangeR(int dr)
+        
+        public virtual bool ChangeR(int dr, int painBoxWidth, int painBoxHeight)
         {
+            var oldR = R;
             R += dr;
             if (R < 1)
             {
                 R = 1;
             }
 
-            CallGummyObservers(0, 0, R);
+            if (!CheckBorder(painBoxWidth, painBoxHeight))
+            {
+                R = oldR;
+                return false;
+            }
+            
+            return true;
         }
+        
         public abstract bool CheckPoint(int _x, int _y);
         public abstract void Draw(Graphics graph);
         public abstract bool CheckBorder(int width, int height);
@@ -128,20 +152,53 @@ namespace StorageForPainDLL
             _flagObservers.Add(flagObserver);
         }
 
-        public void AddMoveShapeObserver(IMoveObserver moveObserver)
+        public void AddShapeChangeObserver(IShapeChangeObserver shapeChangeObserver)
         {
-            _gummyShapeObservers.Add(moveObserver);
+            if (!_shapeChangeObservers.Contains(shapeChangeObserver))
+            {
+                _shapeChangeObservers.Add(shapeChangeObserver);
+            }
+        }
+
+        public void RemoveShapeChangeObserver(IShapeChangeObserver shapeChangeObserver)
+        {
+            _shapeChangeObservers.Remove(shapeChangeObserver);
+        }
+
+        public void RemoveAllObservers()
+        {
+            _shapeChangeObservers.Clear();
         }
         
-        private void CallGummyObservers(int x, int y, int r)
+        private bool CallChangeObservers(int x, int y, int width, int height)
         {
-            foreach (var observer in _gummyShapeObservers)
+            int i;
+            var success = true;
+            for (i = 0; i < _shapeChangeObservers.Count; i++)
             {
-                observer.Update(this, x, y, r);
+                if (!_shapeChangeObservers[i].Update(x, y, width, height))
+                {
+                    success = false;
+                    break;
+                }
             }
+
+            if (success) return true;
+            
+            for (var j = i - 1; j > 0; j--)
+            {
+                _shapeChangeObservers[i].Update(-x, -y, width, height);
+            }
+            
+            return false;
         }
 
         public abstract bool Intersect(Shape shape, bool checkOpposite = true);
         public abstract Point[] GetPoints();
+
+        public bool Update(int dx, int dy, int width, int height)
+        { 
+            return Move(dx, dy, width, height);
+        }
     }
 }

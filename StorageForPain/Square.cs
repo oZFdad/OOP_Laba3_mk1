@@ -67,12 +67,10 @@ namespace StorageForPainDLL
         public override bool Intersect(Shape shape, bool checkOpposite = true)
         {
             var points = shape.GetPoints();
-            var delta = R / sqr2;
-            var rect = new Rectangle((int)(X - delta), (int)(Y - delta), (int)delta*2, (int)delta*2);
             
             foreach (var point in points)
             {
-                if (rect.Contains(point)) return true;
+                if (CheckPoint(point.X, point.Y)) return true;
             }
 
             return checkOpposite && shape.Intersect(this, false);

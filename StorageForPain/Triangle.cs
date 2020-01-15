@@ -42,25 +42,26 @@ namespace StorageForPainDLL
             _points[3].Y = _points[0].Y;
         }
 
-        public override void Move(int dx, int dy)
+        public override bool Move(int dx, int dy, int painBoxWidth, int painBoxHeight)
         {
-            X += dx;
-            Y += dy;
-            for(int i = 0; i < _points.Length; i++)
+            if (base.Move(dx, dy, painBoxWidth, painBoxHeight))
             {
-                _points[i].X += dx;
-                _points[i].Y += dy;
+                CountPoints();
+                return true;
             }
+
+            return false;
         }
 
-        public override void ChangeR(int dr)
+        public override bool ChangeR(int dr, int painBoxWidth, int painBoxHeight)
         {
-            R += dr;
-            if (R < 1)
+            if (base.ChangeR(dr, painBoxWidth, painBoxHeight))
             {
-                R = 1;
+                CountPoints();
+                return true;
             }
-            CountPoints();
+
+            return false;
         }
 
         public override bool CheckPoint(int dx, int dy)

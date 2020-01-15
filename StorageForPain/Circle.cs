@@ -70,7 +70,7 @@ namespace StorageForPainDLL
             var points = shape.GetPoints();
             foreach (var point in points)
             {
-                if (DistCalc.GetDistance(X, Y, point.X, point.Y) < R)
+                if (CheckPoint(point.X, point.Y))
                 {
                     return true;
                 }

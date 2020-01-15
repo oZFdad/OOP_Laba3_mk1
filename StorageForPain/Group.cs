@@ -79,19 +79,50 @@ namespace StorageForPainDLL
             }
         }
 
-        public override void Move(int dx, int dy)
+        public override bool Move(int dx, int dy, int painBoxWidth, int painBoxHeight)
         {
-            for (int i = 1; i <= GroupStorage.GetMaxIndex(); i++)
+            int i;
+            var success = true;
+            for (i = 1; i <= GroupStorage.GetMaxIndex(); i++)
             {
-                GroupStorage.GetItem(i).Move(dx, dy);
+                if (!GroupStorage.GetItem(i).Move(dx, dy, painBoxWidth, painBoxHeight))
+                {
+                    success = false;
+                    break;
+                }
             }
+
+            if (success) return true;
+            
+            for (var j = i - 1; j > 0; j--)
+            {
+                GroupStorage.GetItem(j).Move(-dx, -dy, painBoxWidth, painBoxHeight);
+            }
+
+            return false;
         }
-        public override void ChangeR(int dr)
+        
+        public override bool ChangeR(int dr, int painBoxWidth, int painBoxHeight)
         {
-            for (int i = 1; i <= GroupStorage.GetMaxIndex(); i++)
+            int i;
+            var success = true;
+            for (i = 1; i <= GroupStorage.GetMaxIndex(); i++)
             {
-                GroupStorage.GetItem(i).ChangeR(dr);
+                if (!GroupStorage.GetItem(i).ChangeR(dr, painBoxWidth, painBoxHeight))
+                {
+                    success = false;
+                    break;
+                }
             }
+            
+            if (success) return true;
+                        
+            for (var j = i - 1; j > 0; j--)
+            {
+                GroupStorage.GetItem(j).ChangeR(-dr, painBoxWidth, painBoxHeight);
+            }
+
+            return false;
         }
 
         public override void Save(StreamWriter writer, int spacing)

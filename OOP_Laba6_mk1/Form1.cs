@@ -111,92 +111,94 @@ namespace OOP_Laba6_mk1
             creatShapeOnPicture = true;
             painBox.Refresh();
         }
-
-        private void btRUp_Click(object sender, EventArgs e)
-        {
-            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
-            {
-                if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
-                {
-                    _storage.GetItem(i).ChangeR(1);
-                    if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
-                    {
-                        _storage.GetItem(i).ChangeR(-1);
-                    }
-                    //_storage.GetItem(i).CheckBorderChangeR(painBox.Width, painBox.Height);
-                }
-            }
-            painBox.Refresh();
-        }
-
-        private void btRDown_Click(object sender, EventArgs e)
+        
+        private void ChangeShapeRadius(int dr)
         {
             for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
                 if (_storage.GetItem(i).Flag)
                 {
-                    _storage.GetItem(i).ChangeR(-1);
+                    _storage.GetItem(i).ChangeR(dr, painBox.Width, painBox.Height);
                 }
             }
+
             painBox.Refresh();
+        }
+
+        private void btRUp_Click(object sender, EventArgs e)
+        {
+            ChangeShapeRadius(1);
+        }
+
+        private void btRDown_Click(object sender, EventArgs e)
+        {
+            ChangeShapeRadius(-1);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             painBox.Focus();
+            var shapesMoved = false;
+            
             for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (_storage.GetItem(i).Flag)
+                var shape = _storage.GetItem(i);
+                if (shape.Flag)
                 {
+                    var dx = 0;
+                    var dy = 0;
                     switch (e.KeyCode)
                     {
                         case Keys.Left:
-                            _storage.GetItem(i).Move(-1, 0);
-                            if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
-                            {
-                                _storage.GetItem(i).Move(1, 0);
-                            }
+                            dx = -1;
                             break;
                         case Keys.Right:
-                            _storage.GetItem(i).Move(1, 0);
-                            if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
-                            {
-                                _storage.GetItem(i).Move(-1, 0);
-                            }
+                            dx = 1;
                             break;
                         case Keys.Up:
-                            _storage.GetItem(i).Move(0, -1);
-                            if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
-                            {
-                                _storage.GetItem(i).Move(0, 1);
-                            }
+                            dy = -1;
                             break;
                         case Keys.Down:
-                            _storage.GetItem(i).Move(0, 1);
-                            if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
-                            {
-                                _storage.GetItem(i).Move(0, -1);
-                            }
+                            dy = 1;
                             break;
                         case Keys.Delete:
-                            if (_storage.GetItem(i).Flag)
+                            if (shape.Flag)
                             {
                                 _storage.DeleteItem(i);
+                                RemoveMoveObserverFromShapes(shape);
                                 i--;
                             }
                             break;
-                        default: break;
+                        default:
+                            break;
+                    }
 
+                    if (dx != 0 || dy != 0)
+                    {
+                        shape.Move(dx, dy, painBox.Width, painBox.Height);
+                        shapesMoved = true;
                     }
                 }
                 
             }
+
+            if (shapesMoved)
+            {
+                ProcessStickyShapes();
+            }
+
             painBox.Refresh();
         }
 
-        private void btChangeColor_Click(object sender, EventArgs e)
+        private void ProcessStickyShapes()
         {
-            
+            for (var i = 1; i <= _storage.GetMaxIndex(); i++)
+            {
+                if (_storage.GetItem(i).Sticky)
+                {
+                    ProcessStickyShape(_storage.GetItem(i));
+                }
+            }
         }
 
         private void painBox_Paint(object sender, PaintEventArgs e)
@@ -223,9 +225,11 @@ namespace OOP_Laba6_mk1
             Storage bufStorage = new Storage();
             for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (_storage.GetItem(i).Flag)
+                var shape = _storage.GetItem(i);
+                if (shape.Flag)
                 {
-                    bufStorage.AddItem(_storage.GetItem(i));
+                    bufStorage.AddItem(shape);
+                    RemoveMoveObserverFromShapes(shape);
                     _storage.DeleteItem(i);
                     i--;
                 }
@@ -234,6 +238,7 @@ namespace OOP_Laba6_mk1
             {
                 _storage.AddItem(new Group(bufStorage));
             }
+            ProcessStickyShapes();
         }
 
         private List<Shape> GetSelectedShapes()
@@ -275,11 +280,13 @@ namespace OOP_Laba6_mk1
             Storage bufStorageGroup = new Storage();
             for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (_storage.GetItem(i).GetType() == typeof(Group))
+                var shape = _storage.GetItem(i);
+                if (shape.GetType() == typeof(Group))
                 {
-                    if (_storage.GetItem(i).Flag)
+                    if (shape.Flag)
                     {
-                        bufStorageGroup.AddItem(_storage.GetItem(i));
+                        bufStorageGroup.AddItem(shape);
+                        RemoveMoveObserverFromShapes(shape);
                         _storage.DeleteItem(i);
                         i--;
                     }
@@ -292,6 +299,16 @@ namespace OOP_Laba6_mk1
                 {
                     _storage.AddItem(bufGroup.GroupStorage.GetItem(j));
                 }
+            }
+            
+            ProcessStickyShapes();
+        }
+
+        private void RemoveMoveObserverFromShapes(IShapeChangeObserver observer)
+        {
+            for (var i = 1; i <= _storage.GetMaxIndex(); i++)
+            {
+                _storage.GetItem(i).RemoveShapeChangeObserver(observer);
             }
         }
 
@@ -348,6 +365,10 @@ namespace OOP_Laba6_mk1
                 {
                     ProcessStickyShape(shape);
                 }
+                else
+                {
+                    shape.RemoveAllObservers();
+                }
             }
             
             painBox.Refresh();
@@ -358,13 +379,11 @@ namespace OOP_Laba6_mk1
             for (var i = 1; i <= _storage.GetMaxIndex(); i++)
             {
                 var s = _storage.GetItem(i);
-                if (s.Sticky) continue;
+                if (s == shape) continue;
 
                 if (s.Intersect(shape))
                 {
-                    s.Sticky = true;
-                    shape.AddMoveShapeObserver(new MoveShapeObserver(s));
-                    ProcessStickyShape(s);
+                    shape.AddShapeChangeObserver(s);
                 }
             }
         }
