@@ -106,6 +106,7 @@ namespace OOP_Laba6_mk1
                     MessageBox.Show("Выберите тип фигуры", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            
             creatShapeOnPicture = true;
             painBox.Refresh();
         }
@@ -141,64 +142,53 @@ namespace OOP_Laba6_mk1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            painBox.Focus();
             for (int i = 1; i <= _storage.GetMaxIndex(); i++)
             {
-                if (e.KeyCode == Keys.Left)
+                if (_storage.GetItem(i).Flag)
                 {
-                    if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
+                    switch (e.KeyCode)
                     {
-                        _storage.GetItem(i).Move(-1, 0);
-                        if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
-                        {
-                            _storage.GetItem(i).Move(1, 0);
-                        }
-                        //_storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
-                    }
-                }
-                if (e.KeyCode == Keys.Right)
-                {
-                    if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
-                    {
-                        _storage.GetItem(i).Move(1, 0);
-                        if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
-                        {
+                        case Keys.Left:
                             _storage.GetItem(i).Move(-1, 0);
-                        }
-                        //_storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
-                    }
-                }
-                if (e.KeyCode == Keys.Up)
-                {
-                    if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
-                    {
-                        _storage.GetItem(i).Move(0, -1);
-                        if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
-                        {
-                            _storage.GetItem(i).Move(0, 1);
-                        }
-                        //_storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
-                    }
-                }
-                if (e.KeyCode == Keys.Down)
-                {
-                    if (_storage.GetItem(i).Flag&&_storage.GetItem(i).CheckBorder(painBox.Width,painBox.Height))
-                    {
-                        _storage.GetItem(i).Move(0, 1);
-                        if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
-                        {
+                            if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
+                            {
+                                _storage.GetItem(i).Move(1, 0);
+                            }
+                            break;
+                        case Keys.Right:
+                            _storage.GetItem(i).Move(1, 0);
+                            if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
+                            {
+                                _storage.GetItem(i).Move(-1, 0);
+                            }
+                            break;
+                        case Keys.Up:
                             _storage.GetItem(i).Move(0, -1);
-                        }
-                        //_storage.GetItem(i).CheckBorderMove(painBox.Width, painBox.Height);
+                            if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
+                            {
+                                _storage.GetItem(i).Move(0, 1);
+                            }
+                            break;
+                        case Keys.Down:
+                            _storage.GetItem(i).Move(0, 1);
+                            if (!_storage.GetItem(i).CheckBorder(painBox.Width, painBox.Height))
+                            {
+                                _storage.GetItem(i).Move(0, -1);
+                            }
+                            break;
+                        case Keys.Delete:
+                            if (_storage.GetItem(i).Flag)
+                            {
+                                _storage.DeleteItem(i);
+                                i--;
+                            }
+                            break;
+                        default: break;
+
                     }
                 }
-                if (e.KeyCode == Keys.Delete)
-                {
-                    if (_storage.GetItem(i).Flag)
-                    {
-                        _storage.DeleteItem(i);
-                        i--;
-                    }
-                }
+                
             }
             painBox.Refresh();
         }
@@ -226,6 +216,7 @@ namespace OOP_Laba6_mk1
                     _storage.GetItem(i).color = GetCurrentSelectedColor();
                 }
             }
+            
             painBox.Refresh();
         }
 
@@ -297,6 +288,7 @@ namespace OOP_Laba6_mk1
             int a = 0;
         }
 
+
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog
@@ -335,4 +327,6 @@ namespace OOP_Laba6_mk1
             painBox.Refresh();
         }
     }
+
+    
 }

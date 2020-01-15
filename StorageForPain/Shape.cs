@@ -8,6 +8,7 @@ namespace StorageForPainDLL
     public abstract class Shape
     {
         public int x, y, r;
+        public bool gummy = false;
 
         private bool _flag;
         public bool Flag
@@ -25,7 +26,8 @@ namespace StorageForPainDLL
             }
         }
 
-        private List<IFlagObserver> _flagObservers = new List<IFlagObserver>();
+        private readonly List<IFlagObserver> _flagObservers = new List<IFlagObserver>();
+        private readonly List<IGummyShapeObserver> _gummyShapeObservers = new List<IGummyShapeObserver>();
         
         public Color color = Color.Red;
 
@@ -65,6 +67,7 @@ namespace StorageForPainDLL
         {
             x += dx;
             y += dy;
+            CallGummyObservers(x,y,0);
         }
         public virtual void ChangeR(int dr)
         {
@@ -73,6 +76,8 @@ namespace StorageForPainDLL
             {
                 r = 1;
             }
+
+            CallGummyObservers(0, 0, r);
         }
         public abstract bool CheckPoint(int _x, int _y);
         public abstract void Draw(Graphics graph);
@@ -97,6 +102,19 @@ namespace StorageForPainDLL
         public void AddFlagObserver(IFlagObserver flagObserver)
         {
             _flagObservers.Add(flagObserver);
+        }
+
+        public void AddGummyShapeObserver(IGummyShapeObserver gummyShapeObserver)
+        {
+            _gummyShapeObservers.Add(gummyShapeObserver);
+        }
+        
+        private void CallGummyObservers(int x, int y, int r)
+        {
+            foreach (var observer in _gummyShapeObservers)
+            {
+                observer.Update(this, x, y, r);
+            }
         }
     }
 }
