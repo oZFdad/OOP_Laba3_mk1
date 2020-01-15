@@ -30,6 +30,7 @@ namespace OOP_Laba6_mk1
             cbColorChange.Items.AddRange(_colors.Select(c => c.Name).ToArray());
             
             _storage.AddStorageObserver(new TreeViewStorageObserver(treeViewShape));
+            cbShapeChange.Text = "Circle";
         }
 
         private void DeleteMarkedItems()
