@@ -13,7 +13,10 @@ namespace StorageForPainDLL
         {
         }
 
-        public override string Name => "Circle";
+        public override string Name
+        {
+            get { return "Circle"; }
+        }
 
         public override void Display()
         {
@@ -81,7 +84,15 @@ namespace StorageForPainDLL
 
         public override Point[] GetPoints()
         {
-            return new[] {new Point(X, Y)};
+            Point [] points = new Point[360];
+            for (int i = 0; i < points.Length; i++)
+            {
+                points[i].X = X + (int)(R * Math.Cos(i));
+                points[i].Y = Y + (int)(R * Math.Sin(i));
+            }
+
+            return points;
+            //return new[] {new Point(X, Y)};
         }
     }
 }

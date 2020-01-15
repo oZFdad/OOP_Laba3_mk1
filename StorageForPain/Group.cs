@@ -9,7 +9,7 @@ namespace StorageForPainDLL
     {
         public Storage GroupStorage = new Storage(10);
 
-        //Example
+        /*
         public override Color ColorProperty
         {
             get => _color;
@@ -22,7 +22,7 @@ namespace StorageForPainDLL
                 }
             }
         }
-        //Example
+        */
 
         public Group(Vbr value) : base(value)
         {

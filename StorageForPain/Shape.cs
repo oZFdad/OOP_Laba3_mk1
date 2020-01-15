@@ -35,14 +35,14 @@ namespace StorageForPainDLL
         
         public Color color = Color.Red;
 
-        //Example
+        /*
         protected Color _color = Color.Red;
         public virtual Color ColorProperty
         {
             get { return _color; }
             set { _color = value; }
         }
-        //Example
+        */
 
         public abstract string Name { get; }
         
