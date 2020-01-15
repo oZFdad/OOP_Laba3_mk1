@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 
@@ -106,6 +107,30 @@ namespace StorageForPainDLL
             color = Color.FromName(parts[1]);
             Flag = bool.Parse(parts[2]);
             GroupStorage.Load(reader);
+        }
+
+        public override bool Intersect(Shape shape, bool checkOpposite = true)
+        {
+            for (var i = 1; i <= GroupStorage.GetMaxIndex(); i++)
+            {
+                if (GroupStorage.GetItem(i).Intersect(shape))
+                {
+                    return true;
+                }
+            }
+
+            return checkOpposite && shape.Intersect(this, false);
+        }
+
+        public override Point[] GetPoints()
+        {
+            var points = new List<Point>();
+            for (var i = 1; i <= GroupStorage.GetMaxIndex(); i++)
+            {
+                points.AddRange(GroupStorage.GetItem(i).GetPoints());
+            }
+
+            return points.ToArray();
         }
     }
 }

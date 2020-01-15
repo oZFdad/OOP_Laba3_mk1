@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 
 namespace StorageForPainDLL
 {
-    public abstract class Shape
+    public abstract class Shape : IMove
     {
-        public int x, y, r;
-        public bool gummy = false;
+        public int X;
+        public int Y;
+        public int R;
+        
+        public bool Sticky = false;
 
         private bool _flag;
         public bool Flag
@@ -27,7 +31,7 @@ namespace StorageForPainDLL
         }
 
         private readonly List<IFlagObserver> _flagObservers = new List<IFlagObserver>();
-        private readonly List<IGummyShapeObserver> _gummyShapeObservers = new List<IGummyShapeObserver>();
+        private readonly List<IMoveObserver> _gummyShapeObservers = new List<IMoveObserver>();
         
         public Color color = Color.Red;
 
@@ -44,16 +48,16 @@ namespace StorageForPainDLL
 
         public Shape(Vbr value)
         {
-            x = value.x;
-            y = value.y;
-            r = value.r;
+            X = value.x;
+            Y = value.y;
+            R = value.r;
         }
 
         public Shape(int x1, int y1, int r1)
         {
-            x = x1;
-            y = y1;
-            r = r1;
+            X = x1;
+            Y = y1;
+            R = r1;
         }
 
         public Shape()
@@ -65,36 +69,56 @@ namespace StorageForPainDLL
 
         public virtual void Move(int dx, int dy)
         {
-            x += dx;
-            y += dy;
-            CallGummyObservers(x,y,0);
+            X += dx;
+            Y += dy;
+            CallGummyObservers(X,Y,0);
         }
         public virtual void ChangeR(int dr)
         {
-            r += dr;
-            if (r < 1)
+            R += dr;
+            if (R < 1)
             {
-                r = 1;
+                R = 1;
             }
 
-            CallGummyObservers(0, 0, r);
+            CallGummyObservers(0, 0, R);
         }
         public abstract bool CheckPoint(int _x, int _y);
         public abstract void Draw(Graphics graph);
         public abstract bool CheckBorder(int width, int height);
 
+        protected Pen GetPen()
+        {
+            Pen pen;
+            if (Flag)
+            {
+                pen = new Pen(color, 10);
+            }
+            else
+            {
+                pen = new Pen(color, 2);
+            }
+
+            if (Sticky)
+            {
+                pen.DashStyle = DashStyle.Dash;
+            }
+
+            return pen;
+        }
+        
         public virtual void Save(StreamWriter writer, int spacing)
         {
             writer.Write(new string(' ', spacing));
-            writer.WriteLine($"{Name} {x} {y} {r} {color.Name} {Flag}");
+            writer.WriteLine($"{Name} {X} {Y} {R} {color.Name} {Flag}");
         }
 
         public virtual void Load(string shapeLine, StreamReader reader)
         {
             var parts = shapeLine.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-            x = int.Parse(parts[1]);
-            y = int.Parse(parts[2]);
-            r = int.Parse(parts[3]);
+            X = int.Parse(parts[1]);
+            Y = int.Parse(parts[2]);
+            R = int.Parse(parts[3]);
             color = Color.FromName(parts[4]);
             Flag = bool.Parse(parts[5]);
         }
@@ -104,9 +128,9 @@ namespace StorageForPainDLL
             _flagObservers.Add(flagObserver);
         }
 
-        public void AddGummyShapeObserver(IGummyShapeObserver gummyShapeObserver)
+        public void AddMoveShapeObserver(IMoveObserver moveObserver)
         {
-            _gummyShapeObservers.Add(gummyShapeObserver);
+            _gummyShapeObservers.Add(moveObserver);
         }
         
         private void CallGummyObservers(int x, int y, int r)
@@ -116,5 +140,8 @@ namespace StorageForPainDLL
                 observer.Update(this, x, y, r);
             }
         }
+
+        public abstract bool Intersect(Shape shape, bool checkOpposite = true);
+        public abstract Point[] GetPoints();
     }
 }

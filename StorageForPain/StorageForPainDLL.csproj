@@ -40,9 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circle.cs" />
+    <Compile Include="DistCalc.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="IFlagObserver.cs" />
-    <Compile Include="IGummyShapeObserver.cs" />
+    <Compile Include="IMoveObserver.cs" />
     <Compile Include="IStorageObserver.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="ShapeFactory.cs" />

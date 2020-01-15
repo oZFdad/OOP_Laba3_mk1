@@ -1,6 +1,6 @@
 namespace StorageForPainDLL
 {
-    public interface IGummyShapeObserver
+    public interface IMoveObserver
     {
         void Update(Shape shape, int dx, int dy, int dr);
     }

@@ -17,14 +17,14 @@ namespace StorageForPainDLL
 
         public override void Display()
         {
-            Console.WriteLine("Это окружность с центром Х={0} Y={1} и радиусом R={2}", x, y, r);
+            Console.WriteLine("Это окружность с центром Х={0} Y={1} и радиусом R={2}", X, Y, R);
         }
 
         public override bool CheckPoint(int dx, int dy)
         {
-            dx = x - dx;
-            dy = y - dy;
-            if (dx * dx + dy * dy <= r * r)
+            dx = X - dx;
+            dy = Y - dy;
+            if (dx * dx + dy * dy <= R * R)
             {
                 return true;
             }
@@ -36,37 +36,52 @@ namespace StorageForPainDLL
 
         public override void Draw(Graphics graph)
         {
-            Pen pen;
-            if (Flag)
-            {
-                pen = new Pen(color, 10);
-            }
-            else
-            {
-                pen = new Pen(color);
-            }
-            graph.DrawEllipse(pen, x - r, y - r, 2*r, 2*r);
+            graph.DrawEllipse(GetPen(), X - R, Y - R, 2*R, 2*R);
         }
 
         public override bool CheckBorder(int width, int height)
         {
-            if (x - r <= 0)
+            if (X - R <= 0)
             {
                 return false;
             }
-            if (x + r >= width)
+            if (X + R >= width)
             {
                 return false;
             }
-            if (y - r <= 0)
+            if (Y - R <= 0)
             {
                 return false;
             }
-            if (y + r >= height)
+            if (Y + R >= height)
             {
                 return false;
             }
             return true;
+        }
+
+        public override bool Intersect(Shape shape, bool checkOpposite = true)
+        {
+            if (shape is Circle)
+            {
+                return R + shape.R > DistCalc.GetDistance(X, Y, shape.X, shape.Y);
+            }
+
+            var points = shape.GetPoints();
+            foreach (var point in points)
+            {
+                if (DistCalc.GetDistance(X, Y, point.X, point.Y) < R)
+                {
+                    return true;
+                }
+            }
+
+            return checkOpposite && shape.Intersect(this, false);
+        }
+
+        public override Point[] GetPoints()
+        {
+            return new[] {new Point(X, Y)};
         }
     }
 }

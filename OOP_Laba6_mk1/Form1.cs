@@ -210,12 +210,9 @@ namespace OOP_Laba6_mk1
 
         private void cbColorChange_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int i = 1; i <= _storage.GetMaxIndex(); i++)
+            foreach (var shape in GetSelectedShapes())
             {
-                if (_storage.GetItem(i).Flag)
-                {
-                    _storage.GetItem(i).color = GetCurrentSelectedColor();
-                }
+                shape.color = GetCurrentSelectedColor();
             }
             
             painBox.Refresh();
@@ -237,6 +234,20 @@ namespace OOP_Laba6_mk1
             {
                 _storage.AddItem(new Group(bufStorage));
             }
+        }
+
+        private List<Shape> GetSelectedShapes()
+        {
+            var result = new List<Shape>();
+            for (var i = 1; i <= _storage.GetMaxIndex(); i++)
+            {
+                if (_storage.GetItem(i).Flag)
+                {
+                    result.Add(_storage.GetItem(i));
+                }
+            }
+
+            return result;
         }
 /*
         private void btUnGroup_Click(object sender, EventArgs e) // разгруппироввать все и вся
@@ -326,6 +337,36 @@ namespace OOP_Laba6_mk1
         {
             ((IFlagObserver)e.Node.Tag).Update(e.Node.Checked);
             painBox.Refresh();
+        }
+
+        private void btChangeSticky_Click(object sender, EventArgs e)
+        {
+            foreach (var shape in GetSelectedShapes())
+            {
+                shape.Sticky = !shape.Sticky;
+                if (shape.Sticky)
+                {
+                    ProcessStickyShape(shape);
+                }
+            }
+            
+            painBox.Refresh();
+        }
+
+        private void ProcessStickyShape(Shape shape)
+        {
+            for (var i = 1; i <= _storage.GetMaxIndex(); i++)
+            {
+                var s = _storage.GetItem(i);
+                if (s.Sticky) continue;
+
+                if (s.Intersect(shape))
+                {
+                    s.Sticky = true;
+                    shape.AddMoveShapeObserver(new MoveShapeObserver(s));
+                    ProcessStickyShape(s);
+                }
+            }
         }
     }
 
