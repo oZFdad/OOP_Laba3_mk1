@@ -133,7 +133,7 @@ namespace StorageForPainDLL
             writer.Dispose();
         }
 
-        public void Load(StreamReader reader)
+        public void Load(StreamReader reader, ShapeFactory shapeFactory)
         {
             var count = reader.ReadLine();
             if (count == null) throw new FormatException("Пустая строка");
@@ -149,9 +149,9 @@ namespace StorageForPainDLL
                 if (shapeLine == null) throw new FormatException("Пустая строка");
 
                 var shapeParts = shapeLine.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-                var shape = ShapeFactory.Create(shapeParts[0]);
-
-                shape.Load(shapeLine, reader);
+                var shape = shapeFactory.Create(shapeParts[0]);//работает со старым shapefactory, то есть без перекомпиляции с новыми объектами работать не будет
+                // инверсия зависимостей
+                shape.Load(shapeLine, reader, shapeFactory);
 
                 AddItem(shape);
             }
@@ -159,10 +159,10 @@ namespace StorageForPainDLL
             CallStorageObservers();
         }
 
-        public void LoadFromFile(string fileName)
+        public void LoadFromFile(string fileName, ShapeFactory shapeFactory)
         {
             var reader = new StreamReader(fileName);
-            Load(reader);
+            Load(reader, shapeFactory);
             reader.Dispose();
         }
 

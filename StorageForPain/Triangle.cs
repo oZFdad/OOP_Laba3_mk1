@@ -105,9 +105,9 @@ namespace StorageForPainDLL
             return true;
         }
 
-        public override void Load(string shapeLine, StreamReader reader)
+        public override void Load(string shapeLine, StreamReader reader, ShapeFactory shapeFactory)
         {
-            base.Load(shapeLine, reader);
+            base.Load(shapeLine, reader, shapeFactory);
             CountPoints();
         }
 

@@ -132,12 +132,12 @@ namespace StorageForPainDLL
             GroupStorage.Save(writer, spacing + 2);
         }
 
-        public override void Load(string shapeLine, StreamReader reader)
+        public override void Load(string shapeLine, StreamReader reader, ShapeFactory shapeFactory)
         {
             var parts = shapeLine.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             color = Color.FromName(parts[1]);
             Flag = bool.Parse(parts[2]);
-            GroupStorage.Load(reader);
+            GroupStorage.Load(reader, shapeFactory);
         }
 
         public override bool Intersect(Shape shape, bool checkOpposite = true)

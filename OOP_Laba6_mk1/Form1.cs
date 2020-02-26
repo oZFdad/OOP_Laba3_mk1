@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using StorageForPainDLL;
 
@@ -329,7 +324,8 @@ namespace OOP_Laba6_mk1
             var result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                _storage.LoadFromFile(dialog.FileName);
+                var shapefactory = new ShapeFactory();
+                _storage.LoadFromFile(dialog.FileName, shapefactory);
                 painBox.Refresh();
             }
         }

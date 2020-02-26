@@ -2,9 +2,9 @@ using System;
 
 namespace StorageForPainDLL
 {
-    public static class ShapeFactory
+    public class ShapeFactory
     {
-        public static Shape Create(string name)
+        public Shape Create(string name)
         {
             switch (name.ToLower())
             {

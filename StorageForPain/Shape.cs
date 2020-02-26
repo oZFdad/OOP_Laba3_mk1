@@ -137,7 +137,7 @@ namespace StorageForPainDLL
             writer.WriteLine($"{Name} {X} {Y} {R} {color.Name} {Flag}");
         }
 
-        public virtual void Load(string shapeLine, StreamReader reader)
+        public virtual void Load(string shapeLine, StreamReader reader, ShapeFactory shapeFactory)
         {
             var parts = shapeLine.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             X = int.Parse(parts[1]);

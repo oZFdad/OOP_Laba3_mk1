@@ -1,0 +1,10 @@
+Count 3
+Square 594 249 100 DarkRed True
+Group CadetBlue True
+  Count 2
+  Circle 227 101 100 CadetBlue True
+  Triangle 254 251 100 CadetBlue True
+Group DarkSalmon False
+  Count 2
+  Square 363 164 99 DarkSalmon False
+  Triangle 466 398 99 DarkSalmon False

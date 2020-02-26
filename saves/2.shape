@@ -1,0 +1,11 @@
+Count 1
+Group Red True
+  Count 2
+  Group Red True
+    Count 2
+    Circle 444 209 100 Red True
+    Circle 566 361 100 Red True
+  Group Red True
+    Count 2
+    Circle 208 386 100 Red True
+    Triangle 193 187 100 Red True
